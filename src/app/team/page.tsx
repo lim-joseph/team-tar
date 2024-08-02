@@ -57,7 +57,7 @@ export default function Page() {
     {/* input box for the location postcode */}
     <div className="mt-12 ml-12 text-xl">
       Postcode
-      <Input id="teamDescriptionInputBox" type="number" placeholder="Enter Your Postcode" min="0200"className="mt-4 w-3/5 max-w-screen-xl"></Input>
+      <Input id="teamPostcodeInputBox" type="number" placeholder="Enter Your Postcode" min="0200"className="mt-4 w-3/5 max-w-screen-xl"></Input>
     </div>
 
     <div className="mt-12 ml-12">
@@ -65,5 +65,6 @@ export default function Page() {
       Create Team
     </Button>
     </div>
+
   </div>;
 }

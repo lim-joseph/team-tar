@@ -1,3 +1,5 @@
+"use server";
+import {revalidatePath} from "next/cache";
 import {createClient} from "@/lib/supabase/server";
 import {redirect} from "next/navigation";
 import {createHash} from "crypto";
@@ -9,29 +11,38 @@ interface TeamForm {
   teamDescription: string;
 }
 
-export async function registerTeam(teamData: TeamForm) {
+export async function registerTeam(formData: FormData) {
+  const teamData: TeamForm = {
+    teamName: formData.get("teamName") as string,
+    postcode: parseInt(formData.get("postcode") as string),
+    sport: formData.get("sport") as string,
+    teamDescription: formData.get("teamDescription") as string,
+  };
+  console.log(teamData);
   const supabase = createClient();
-  const user = await supabase.auth.getSession();
-  if (!user.data) {
-    redirect("/login");
+
+  const {data, error} = await supabase
+    .from("Team")
+    .insert([
+      {
+        name: teamData.teamName,
+        postcode: teamData.postcode,
+        sport: teamData.sport,
+        description: teamData.teamDescription,
+      },
+    ])
+    .select("id");
+  if (data && !error) {
+    const code = createHash("sha256")
+      .update(data[0].id.toString())
+      .digest("base64")
+      .substring(0, 8);
+    console.log(code);
+    if (!error) {
+      redirect("/team/" + code);
+    }
   }
-  const inviteCode = createHash("sha256").update(
-    teamData.teamName + Date.now().toString()
-  );
-  const {data, error} = await supabase.from("Team").insert([
-    {
-      name: teamData.teamName,
-      postcode: teamData.postcode,
-      sport: teamData.sport,
-      description: teamData.teamDescription,
-      invite_code: inviteCode,
-    },
-  ]);
-  console.log(data);
-  console.log(error);
-  if (error) {
-    return {error: error.message};
-  }
+
   return {data};
 }
 

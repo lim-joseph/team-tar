@@ -18,8 +18,6 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { logout } from "./logout/action";
@@ -116,24 +114,24 @@ export default function RootLayout({
 										</Link>
 									</div>
 									<div className="mt-auto p-4 gap-4 flex flex-col border-t">
-										<div className="flex gap-4 items-center ">
+										<div className="flex gap-4">
 											<DropdownMenu>
 												<DropdownMenuTrigger asChild>
 													<Button
-														variant="secondary"
-														size="icon"
-														className="rounded-full"
+														variant="ghost"
+														className="flex gap-4 w-full justify-start text-left"
 													>
 														<CircleUser className="h-5 w-5" />
+														<div className="text-sm">
+															<p className="font-bold">Joseph</p>
+															<p className="text-muted-foreground">
+																joseph@example.com
+															</p>
+														</div>
 														<span className="sr-only">Toggle user menu</span>
 													</Button>
 												</DropdownMenuTrigger>
 												<DropdownMenuContent align="end">
-													<DropdownMenuLabel>My Account</DropdownMenuLabel>
-													<DropdownMenuSeparator />
-													<DropdownMenuItem>Settings</DropdownMenuItem>
-													<DropdownMenuItem>Support</DropdownMenuItem>
-													<DropdownMenuSeparator />
 													<DropdownMenuItem>
 														<form action={logout} method="post">
 															<button type="submit">Logout</button>
@@ -141,12 +139,6 @@ export default function RootLayout({
 													</DropdownMenuItem>
 												</DropdownMenuContent>
 											</DropdownMenu>
-											<div className="text-sm">
-												<p className="font-bold">Joseph</p>
-												<p className="text-muted-foreground">
-													joseph@example.com
-												</p>
-											</div>
 										</div>
 									</div>
 								</div>

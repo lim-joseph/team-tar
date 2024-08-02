@@ -1,5 +1,13 @@
+import { Button } from "@/components/ui/button";
+import {
+	ResizableHandle,
+	ResizablePanel,
+	ResizablePanelGroup,
+} from "@/components/ui/resizable";
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { Inter as FontSans } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const fontSans = FontSans({
@@ -21,11 +29,33 @@ export default function RootLayout({
 		<html lang="en">
 			<body
 				className={cn(
-					"min-h-screen bg-background font-sans antialiased",
+					"min-h-screen bg-background font-sans antialiased p-8 flex",
 					fontSans.variable
 				)}
 			>
-				{children}
+				<ResizablePanelGroup direction="horizontal" className="min-h-screen">
+					<ResizablePanel defaultSize={18}>
+						<aside className="flex flex-col gap-4">
+							<Button variant="link" className="justify-start">
+								teamStar
+							</Button>
+							<Separator />
+							<Button variant="link" className="justify-start">
+								<Link href="/dashboard">Dashboard</Link>
+							</Button>
+							<Button variant="link" className="justify-start">
+								<Link href="/dashboard">Dashboard</Link>
+							</Button>
+							<Button variant="link" className="justify-start">
+								<Link href="/dashboard">Dashboard</Link>
+							</Button>
+						</aside>
+					</ResizablePanel>
+					<ResizableHandle />
+					<ResizablePanel className="border rounded-md border-l-0">
+						{children}
+					</ResizablePanel>
+				</ResizablePanelGroup>
 			</body>
 		</html>
 	);

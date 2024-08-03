@@ -20,6 +20,7 @@ import {Button} from "@/components/ui/button";
 import {getTeam} from "../action";
 import PendingMembersCard from "./PendingMembers";
 import {useEffect, useState} from "react";
+import {set} from "date-fns";
 export default function Dashboard({params}: {params: {dashboard: string}}) {
   const {dashboard} = params;
   const [team, setTeam] = useState({
@@ -29,11 +30,15 @@ export default function Dashboard({params}: {params: {dashboard: string}}) {
     teamDescription: "",
     postcode: "",
   });
+  const [approvedMembers, setApprovedMembers] = useState([]);
+  const [pendingMembers, setPendingMembers] = useState([]);
   useEffect(() => {
     async function fetchTeam() {
       const team = await getTeam(dashboard);
       console.log(team);
       setTeam(team);
+      setApprovedMembers(team.members.filter((member) => member.is_member));
+      setPendingMembers(team.members.filter((member) => !member.is_member));
     }
     fetchTeam();
   }, [dashboard]);
@@ -51,8 +56,6 @@ export default function Dashboard({params}: {params: {dashboard: string}}) {
     navigator.clipboard.writeText(inviteCode);
     alert("Invite code copied to clipboard!");
   };
-  console.log(team);
-
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-5xl font-bold mb-28">{team.teamName}</h1>
@@ -136,14 +139,14 @@ export default function Dashboard({params}: {params: {dashboard: string}}) {
                   </Avatar>
                   <div className="ml-4">{team.moderator.username}</div>
                 </div>
-                {team.members &&
-                  team.members.map((member) => (
+                {approvedMembers &&
+                  approvedMembers.map(({User}) => (
                     <div className="flex items-center mt-4">
                       <Avatar>
                         <AvatarImage src="https://via.placeholder.com/40" />
                         <AvatarFallback>CA</AvatarFallback>
                       </Avatar>
-                      <div className="ml-4">{member.username}</div>
+                      <div className="ml-4">{User.username}</div>
                     </div>
                   ))}
               </CardContent>
@@ -187,7 +190,7 @@ export default function Dashboard({params}: {params: {dashboard: string}}) {
                 </Table>
               </CardContent>
             </Card>
-            <PendingMembersCard teamId={dashboard} members={team.members} />
+            <PendingMembersCard teamId={dashboard} members={pendingMembers} />
           </div>
         </div>
       </div>

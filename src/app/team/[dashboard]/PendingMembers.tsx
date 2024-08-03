@@ -16,19 +16,6 @@ export default function PendingMembersCard({
   teamId: string;
   members: any[];
 }) {
-  const [pendingMembers, setPendingMembers] = useState(
-    members.filter((member) => member.is_member === false)
-  );
-
-  useEffect(() => {
-    // Fetch the pending members when the component mounts
-    async function fetchPendingMembers() {
-      const members = await getPendingMembers(teamId); // Replace with your actual API call
-      setPendingMembers(members);
-    }
-
-    fetchPendingMembers();
-  }, [teamId]);
 
   return (
     <Card className="sm:h-[400px] bg-neutral-100 overflow-y-auto">
@@ -40,17 +27,19 @@ export default function PendingMembersCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {pendingMembers.length > 0 ? (
-          pendingMembers.map((member) => (
+        {members.length > 0 ? (
+          members.map((member) => (
             <div key={member.id} className="flex items-center mt-4">
               <Avatar>
                 <AvatarImage
                   src={member.avatarUrl || "https://via.placeholder.com/40"}
                 />
-                <AvatarFallback>{member.username.charAt(0)}</AvatarFallback>
+                <AvatarFallback>
+                  {member.User.username.charAt(0)}
+                </AvatarFallback>
               </Avatar>
-              <div className="ml-4">{member.username}</div>
-              <Button className="ml-auto bg-green-500 text-white px-4 py-2 rounded">
+              <div className="ml-4">{member.User.username}</div>
+              <Button className="ml-auto bg-green-500 text-white px-4 py-2 rounded" onClick = {()=>}>
                 Accept
               </Button>
               <Button className="ml-auto bg-green-500 text-white px-4 py-2 rounded">

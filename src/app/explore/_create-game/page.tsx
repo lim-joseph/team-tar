@@ -96,7 +96,7 @@ export function CreateGame() {
 				<DialogHeader>
 					<DialogTitle>Create a game</DialogTitle>
 					<DialogDescription>
-						Make changes to your game here. Click save when you're done.
+						Make changes to your game here. Click save when you&lsquo;re done.
 					</DialogDescription>
 				</DialogHeader>
 

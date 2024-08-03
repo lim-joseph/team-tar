@@ -91,15 +91,31 @@ export async function getModeratingTeams() {
   if (userId) {
     const {data, error} = await supabase
       .from("Team")
-      .select("*")
+      .select("id, name, sport")
       .eq("moderator", userId);
 
     if (error) {
       return {error: error.message};
     }
-    console.log(data);
-    return {data};
+    return data;
   }
+}
+
+export async function getTeams() {
+  const supabase = createClient();
+  const {data: userData} = await supabase.auth.getUser();
+
+  const {data, error} = await supabase
+    .from("Member")
+    .select("Team(*)")
+    .eq("user_id", userData?.user?.id);
+
+  if (error) {
+    return {error: error.message};
+  }
+  console.log(data);
+  const teams = data.map((team) => team.Team);
+  return teams;
 }
 
 export async function editTeam(teamData: TeamForm, teamId: string) {

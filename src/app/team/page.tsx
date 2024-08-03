@@ -1,112 +1,104 @@
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+"use client";
+import {Card} from "@/components/ui/card";
+import {Avatar, AvatarImage, AvatarFallback} from "@/components/ui/avatar";
+import {createClient} from "@/lib/supabase/client";
+import {redirect, useRouter} from "next/navigation";
+import CreateTeamModal from "./CreateTeamModal";
+import {useEffect, useState} from "react";
+import {getTeams, getModeratingTeams} from "./action";
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {registerTeam} from "./action";
-import {createClient} from "@/lib/supabase/server";
-import {redirect} from "next/navigation";
-import { Label } from "@radix-ui/react-dropdown-menu";
+const sportEmoji = {
+  basketball: "🏀",
+  soccer: "⚽️",
+  football: "🏈",
+  baseball: "⚾️",
+  hockey: "🏒",
+  badminton: "🏸",
+  swimming: "🏊",
+};
 
-export default async function Page() {
+export default function Page() {
   const supabase = createClient();
+  const [teams, setTeams] = useState([]);
+  const [moderatingTeams, setModeratingTeams] = useState([]);
+  const router = useRouter();
+  useEffect(() => {
+    async function getProfile() {
+      const {data: loginData, error: loginError} =
+        await supabase.auth.getUser();
+      if (loginError) {
+        redirect("/login");
+      }
+      const userTeams = await getTeams();
+      console.log(userTeams);
+      setTeams(userTeams);
+      const moderatingTeams = await getModeratingTeams();
+      setModeratingTeams(moderatingTeams);
+      console.log(moderatingTeams);
+    }
+    getProfile();
+  }, []);
 
-  const {data, error} = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect("/login");
-  }
   return (
-
-          <Card>
-      <CardHeader>
-        <CardTitle className="bg-slate-600 w-full text-white p-12 text-5xl">Create Your New Team</CardTitle>
-        <CardDescription className="mt-4 ml-12">Fill the form to create your team</CardDescription>
-      </CardHeader>
-      <form action={registerTeam}>
-      <CardContent>
-        {/* input box for the team name */}
-        <div className="ml-12 text-xl">
-          <Label>Team Name</Label>
-          <Input
-            id="teamName"
-            type="text"
-            placeholder="Enter Your Team Name"
-            className="mt-4 w-3/5 max-w-screen-xl	"
-            required
-            name="teamName"
-          ></Input>
+    <div className="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <h1 className="text-3xl font-bold mb-6 text-center">Your Teams</h1>
+      <div className="flex justify-center mb-6">
+        <CreateTeamModal />
+      </div>
+      {moderatingTeams.length > 0 && (
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">Moderating Teams</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {moderatingTeams.map((team) => (
+              <Card
+                key={team.id}
+                className="cursor-pointer hover:bg-gray-100 transition-colors shadow-md"
+              >
+                <div
+                  className="flex items-center p-4 gap-4"
+                  onClick={() => router.push(`/team/${team.id}`)}
+                >
+                  <Avatar className="bg-gray-200 text-2xl">
+                    <AvatarFallback>
+                      {sportEmoji[team.sport.toLowerCase()]}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h3 className="text-lg font-semibold">{team.name}</h3>
+                    <p className="text-gray-600">{team.sport}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
         </div>
-
-        {/* input box for the team description */}
-        <div className="mt-12 ml-12 text-xl">
-          <Label>Team Description</Label>
-          <Input
-            id="teamDescription"
-            type="text"
-            placeholder="Enter Your Description"
-            className="mt-4 w-3/5 max-w-screen-xl"
-            name="teamDescription"
-          ></Input>
+      )}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-4">Your Teams</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {teams.map((team) => (
+            <Card
+              key={team.id}
+              className="cursor-pointer hover:bg-gray-100 transition-colors shadow-md"
+            >
+              <div
+                className="flex items-center p-4 gap-4"
+                onClick={() => router.push(`/team/${team.id}`)}
+              >
+                <Avatar className="bg-gray-200 text-2xl">
+                  <AvatarFallback>
+                    {sportEmoji[team.sport.toLowerCase()]}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <h3 className="text-lg font-semibold">{team.name}</h3>
+                  <p className="text-gray-600">{team.sport}</p>
+                </div>
+              </div>
+            </Card>
+          ))}
         </div>
-
-        {/* selection box for the team sport type */}
-        <div className="mt-12 ml-12 text-xl">
-          <Label>Sport Selection</Label>
-          <Select name="sport">
-            <SelectTrigger className="mt-4 w-3/5 max-w-screen-xl">
-              <SelectValue placeholder="Select sport" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Sports</SelectLabel>
-                <SelectItem value="Basketball">Basketball</SelectItem>
-                <SelectItem value="Soccer">Soccer</SelectItem>
-                <SelectItem value="Badminton">Badminton</SelectItem>
-                <SelectItem value="Volleyball">Volleyball</SelectItem>
-                <SelectItem value="Swimming">Swimming</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* input box for the location postcode */}
-        <div className="mt-12 ml-12 text-xl">
-        <Label>Postcode</Label>
-          <Input
-            id="postcode"
-            type="number"
-            placeholder="Enter Your Postcode"
-            min="0200"
-            className="mt-4 w-3/5 max-w-screen-xl"
-            name="postcode"
-          ></Input>
-        </div>
-
-      </CardContent>
-        <CardFooter>
-     
-            <Button type="submit" className="bg-lime-600 ml-12 mt-8">
-              Create Team
-            </Button>
-        
-        </CardFooter>
-      </form>
-    </Card>
-
+      </div>
+    </div>
   );
 }

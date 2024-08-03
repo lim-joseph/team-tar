@@ -1,6 +1,15 @@
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+import {
   Select,
   SelectContent,
   SelectGroup,
@@ -12,6 +21,7 @@ import {
 import {registerTeam} from "./action";
 import {createClient} from "@/lib/supabase/server";
 import {redirect} from "next/navigation";
+import { Label } from "@radix-ui/react-dropdown-menu";
 
 export default async function Page() {
   const supabase = createClient();
@@ -21,19 +31,17 @@ export default async function Page() {
     redirect("/login");
   }
   return (
-    <div>
-      {/* header */}
-      <div className="bg-slate-600 text-white p-12 text-5xl">
-        Create Your New Team
-      </div>
 
-      <div className="text-slate-400 mt-4 ml-12">
-        Fill the form to create your team
-      </div>
+          <Card>
+      <CardHeader>
+        <CardTitle className="bg-slate-600 w-full text-white p-12 text-5xl">Create Your New Team</CardTitle>
+        <CardDescription className="mt-4 ml-12">Fill the form to create your team</CardDescription>
+      </CardHeader>
       <form action={registerTeam}>
+      <CardContent>
         {/* input box for the team name */}
-        <div className="mt-12 ml-12 text-xl">
-          Team Name
+        <div className="ml-12 text-xl">
+          <Label>Team Name</Label>
           <Input
             id="teamName"
             type="text"
@@ -46,7 +54,7 @@ export default async function Page() {
 
         {/* input box for the team description */}
         <div className="mt-12 ml-12 text-xl">
-          Team Description
+          <Label>Team Description</Label>
           <Input
             id="teamDescription"
             type="text"
@@ -58,7 +66,7 @@ export default async function Page() {
 
         {/* selection box for the team sport type */}
         <div className="mt-12 ml-12 text-xl">
-          Sport Selection
+          <Label>Sport Selection</Label>
           <Select name="sport">
             <SelectTrigger className="mt-4 w-3/5 max-w-screen-xl">
               <SelectValue placeholder="Select sport" />
@@ -78,7 +86,7 @@ export default async function Page() {
 
         {/* input box for the location postcode */}
         <div className="mt-12 ml-12 text-xl">
-          Postcode
+        <Label>Postcode</Label>
           <Input
             id="postcode"
             type="number"
@@ -89,12 +97,16 @@ export default async function Page() {
           ></Input>
         </div>
 
-        <div className="mt-12 ml-12">
-          <Button type="submit" className="bg-lime-600">
-            Create Team
-          </Button>
-        </div>
+      </CardContent>
+        <CardFooter>
+     
+            <Button type="submit" className="bg-lime-600 ml-12 mt-8">
+              Create Team
+            </Button>
+        
+        </CardFooter>
       </form>
-    </div>
+    </Card>
+
   );
 }

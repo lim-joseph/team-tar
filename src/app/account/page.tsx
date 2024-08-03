@@ -1,48 +1,91 @@
-import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
+import {createClient} from "@/lib/supabase/server";
+import {redirect} from "next/navigation";
 
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import {Input} from "@/components/ui/input";
+import {Label} from "@/components/ui/label";
 
 export default async function AccountPage() {
-	const supabase = createClient();
-	const { data, error } = await supabase.auth.getUser();
-	if (error) {
-		redirect("/login");
-	}
+  const supabase = createClient();
+  const {data, error} = await supabase.auth.getUser();
+  if (error) {
+    redirect("/login");
+  }
 
-	return (
-		<div className="flex flex-col gap-4">
-			<h1 className="text-3xl font-bold">
-				{data.user?.user_metadata.username}'s account
-			</h1>
-
-			<div className="grid gap-6">
-				<Card x-chunk="dashboard-04-chunk-1">
-					<CardHeader>
-						<CardTitle>Team name</CardTitle>
-						<CardDescription>
-							Used to identify your team for matches.
-						</CardDescription>
-					</CardHeader>
-					<CardContent>
-						<form>
-							<Input placeholder="Store Name" />
-						</form>
-					</CardContent>
-					<CardFooter className="border-t px-6 py-4">
-						<Button>Save</Button>
-					</CardFooter>
-				</Card>
-			</div>
-		</div>
-	);
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <Card className="w-full max-w-[800px] bg-white shadow-md">
+        <CardHeader>
+          <CardTitle>User Profile</CardTitle>
+          <CardDescription>
+            <div className="border-t border-gray-300 my-4" />
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form>
+            <div className="grid gap-6">
+              <div className="grid gap-2">
+                <Label htmlFor="lastName">Last name</Label>
+                <Input id="lastName" required className="w-full"></Input>
+              </div>
+              <div className="grid gap-2 mt-4">
+                <Label htmlFor="Email">Email</Label>
+                <Input id="Email" required className="w-full" />
+              </div>
+              <div className="grid gap-2 mt-4">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  name="password"
+                  required
+                  className="w-full"
+                  type="password"
+                />
+              </div>
+              <div className="grid gap-2 mt-4">
+                <Label htmlFor="Interest">Interest</Label>
+                <Select name="sport">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select sport" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Sports</SelectLabel>
+                      <SelectItem value="Basketball">Basketball</SelectItem>
+                      <SelectItem value="Soccer">Soccer</SelectItem>
+                      <SelectItem value="Badminton">Badminton</SelectItem>
+                      <SelectItem value="Volleyball">Volleyball</SelectItem>
+                      <SelectItem value="Swimming">Swimming</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </form>
+        </CardContent>
+        <CardFooter>
+          <Button>Save</Button>
+        </CardFooter>
+      </Card>
+    </div>
+  );
 }

@@ -44,6 +44,7 @@ export async function registerTeam(formData: FormData) {
   if (data && !error) {
     console.log(data);
     if (!error) {
+      console.log(code);
       redirect("/team/" + code);
     }
   }
@@ -52,37 +53,41 @@ export async function registerTeam(formData: FormData) {
 }
 
 export async function getTeam(code: string) {
+  console.log(code);
   const supabase = createClient();
   const {data, error} = await supabase
     .from("Team")
-    .select(
-      `id,name, postcode, sport, moderator, description, Member("user_id")`
-    )
+    .select(`id,name, postcode, sport, User(*), description,  Member(*)`)
     .eq("id", code);
-
   if (error) {
     return {error: error.message};
   }
+  if (data.length < 1) {
+    return {error: "Team not found"};
+  }
+  console.log(data[0].Member);
+
   const memberIds = data[0].Member.map((member) => member.user_id);
-  const members = await getMemberInfo(memberIds);
-  console.log(members);
+
+  const members = memberIds.length > 0 ? await getMemberInfo(memberIds) : [];
   const team = {
     teamName: data[0].name,
     postcode: data[0].postcode,
     sport: data[0].sport,
     teamDescription: data[0].description,
+    moderator: data[0].User,
     members: members,
   };
   return team;
 }
 
 export async function getMemberInfo(memberIds: string[]) {
+  console.log(memberIds);
   const supabase = createClient();
   const {data, error} = await supabase
     .from("User")
     .select("*")
     .eq("id", memberIds);
-
   if (error) {
     return {error: error.message};
   }
@@ -124,7 +129,26 @@ export async function editTeam(teamData: TeamForm, teamId: string) {
   return {data};
 }
 
-export async function joinTeam(code: string) {
+export async function pendingMembers(
+  teamId: string,
+  user_id: string,
+  is_member: boolean
+) {
+  const supabase = createClient();
+  const {data, error} = await supabase
+    .from("Member")
+    .update({is_member: is_member})
+    .eq("team_id", teamId)
+    .eq("user_id", user_id);
+
+  if (error) {
+    return {error: error.message};
+  }
+  return {data};
+}
+
+export async function joinTeam(form: FormData) {
+  const code = form.get("teamCode") as string;
   console.log(code);
   const supabase = createClient();
   const user = await supabase.auth.getUser();

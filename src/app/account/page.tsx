@@ -42,7 +42,7 @@ export default async function AccountPage() {
 		<div className="flex items-center justify-center min-h-screen">
 			<Card className="w-full max-w-[800px] bg-white shadow-md">
 				<CardHeader>
-					<CardTitle>{user.first_name}&lsquo;s Profile</CardTitle>
+					<CardTitle>{user.first_name}&apos;s Profile</CardTitle>
 					<CardDescription>
 						<div className="border-t border-gray-300 my-4" />
 					</CardDescription>

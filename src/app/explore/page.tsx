@@ -22,11 +22,11 @@ import {
 
 export default async function Explore() {
 	return (
-		<div className="flex min-h-screen flex-col gap-4">
+		<div className="flex flex-col gap-4">
 			<h1 className="text-lg font-semibold md:text-2xl">Find a game</h1>
 			<Input placeholder="Search" />
 			{/* table */}
-			<Table>
+			<Table className="bg-neutral-900 rounded-lg">
 				<TableHeader>
 					<TableRow>
 						<TableHead className="hidden w-[100px] sm:table-cell">

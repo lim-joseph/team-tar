@@ -6,8 +6,8 @@ import {
 	HelpCircle,
 	History,
 	LineChart,
-	Package2,
 	Settings,
+	Star,
 	Trophy,
 	Users,
 } from "lucide-react";
@@ -15,7 +15,6 @@ import { Inter as FontSans } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 
-import { ModeToggle } from "@/components/ModeToggle";
 import { ThemeProvider } from "@/components/theme-provider";
 import {
 	DropdownMenu,
@@ -48,29 +47,29 @@ export default async function RootLayout({
 		<html lang="en">
 			<body
 				className={cn(
-					"min-h-screen bg-background font-sans antialiased flex",
+					"min-h-screen ) bg-background font-sans antialiased flex",
 					fontSans.variable
 				)}
 			>
 				<ThemeProvider
 					attribute="class"
-					defaultTheme="system"
+					defaultTheme="dark"
 					enableSystem
 					disableTransitionOnChange
 				>
-					<div className="grid min-h-svh w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+					<div className="grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] w-full">
 						{/* sidebar */}
-						<aside className="hidden border-r bg-muted/40 md:block">
-							<nav className="flex h-full max-h-screen flex-col gap-2">
+						<aside className="hidden border-r bg-muted/40 md:block max-h-screen">
+							<nav className="flex h-full flex-col gap-2">
 								<div className="flex justify-between h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
 									<Link
 										href="/"
 										className="flex items-center gap-2 font-semibold"
 									>
-										<Package2 className="h-6 w-6" />
+										<Star className="h-6 w-6" />
 										<span className="">teamStar</span>
 									</Link>
-									<ModeToggle />
+									{/* <ModeToggle /> */}
 								</div>
 								<div className="flex-1">
 									<nav className="grid items-start px-2 text-md font-medium lg:px-4">
@@ -82,21 +81,21 @@ export default async function RootLayout({
 											Find a game
 										</Link>
 										<Link
-											href="#"
+											href="/account"
 											className="flex items-center gap-3 rounded-lg  px-3 py-2 text-muted-foreground transition-all hover:text-primary"
 										>
 											<Users className="h-4 w-4" />
-											Team
+											Your team
 										</Link>
 										<Link
-											href="#"
+											href="/history"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
 										>
 											<History className="h-4 w-4" />
 											Your matches
 										</Link>
 										<Link
-											href="#"
+											href="/stats"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
 										>
 											<LineChart className="h-4 w-4" />
@@ -107,14 +106,14 @@ export default async function RootLayout({
 								<div className="flex flex-col gap-4">
 									<div className="flex flex-col px-4 text-md font-medium lg:px-4">
 										<Link
-											href="#"
+											href="/support"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
 										>
 											<HelpCircle className="h-4 w-4" />
 											Support
 										</Link>
 										<Link
-											href="#"
+											href="/account"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
 										>
 											<Settings className="h-4 w-4" />
@@ -175,10 +174,8 @@ export default async function RootLayout({
 						</aside>
 
 						{/* main */}
-						<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-							<div className="flex flex-col gap-1 p-8 min-h-full xl:mx-28 justify-center">
-								{children}
-							</div>
+						<main className="flex flex-col gap-4 justify-center xl:px-[15%] p-16 bg-[url('../../public/waves.svg')] bg-no-repeat bg-center bg-cover bg-opacity-50">
+							{children}
 						</main>
 					</div>
 				</ThemeProvider>

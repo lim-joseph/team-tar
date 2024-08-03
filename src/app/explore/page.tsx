@@ -36,7 +36,7 @@ export default function Explore() {
 	});
 
 	return (
-		<div className="flex flex-col gap-4">
+		<div className="flex flex-col gap-4 ">
 			<div>
 				<h1 className="text-3xl font-bold tracking-tight mt-12">Find a game</h1>
 				<h2 className="text-sm text-muted-foreground">

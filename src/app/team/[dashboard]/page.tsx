@@ -106,7 +106,7 @@ export default function Dashboard({
 				</Card>
 
 				{/* Match History Card Section */}
-				<Card className="h-full sm:h-[820px] bg-neutral-100 overflow-y-auto">
+				<Card className="h-full bg-neutral-100 overflow-y-auto">
 					<CardHeader>
 						<CardTitle>Match History</CardTitle>
 						<CardDescription>
@@ -183,7 +183,10 @@ export default function Dashboard({
 								</div>
 								{approvedMembers &&
 									approvedMembers.map(({ User }) => (
-										<div className="flex items-center mt-4">
+										<div
+											className="flex items-center mt-4"
+											key={crypto.randomUUID()}
+										>
 											<Avatar>
 												<AvatarImage src="https://via.placeholder.com/40" />
 												<AvatarFallback>CA</AvatarFallback>

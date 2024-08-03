@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function NotFound() {
 	return (
-		<div className="flex items-center justify-center mt-[25%]">
+		<div className="flex items-center justify-center">
 			<Card className="w-[350px] rounded-lg">
 				<CardHeader className="text-center">
 					<Wrench className="mx-auto h-12 w-12 text-primary" />

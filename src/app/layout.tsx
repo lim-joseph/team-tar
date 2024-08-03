@@ -76,7 +76,7 @@ export default async function RootLayout({
 									>
 										<Link
 											href="/explore"
-											className="flex justify-start items-center gap-3 rounded-lg px-3 py-2  bg-muted transition-all pl-3 active:bg-neutral-300"
+											className="flex justify-start items-center gap-3 rounded-lg px-3 py-2  bg-muted transition-all pl-3 active:bg-neutral-300 hover:bg-neutral-200"
 										>
 											<Trophy className="h-4 w-4" />
 											Find a game
@@ -211,7 +211,7 @@ export default async function RootLayout({
 					</aside>
 
 					{/* main */}
-					<main className="flex flex-col gap-4  xl:px-[15%] p-16 bg-[url('../../public/waves.svg')] bg-no-repeat bg-center bg-cover bg-opacity-50">
+					<main className="flex flex-col gap-4 justify-center  xl:px-[15%] p-16 bg-[url('../../public/waves.svg')] bg-no-repeat bg-center bg-cover bg-opacity-50">
 						{children}
 					</main>
 				</div>

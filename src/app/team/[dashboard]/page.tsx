@@ -7,6 +7,18 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+
+import { Button } from "@/components/ui/button"
+
 export default async function test({params}: {params: {dashboard: string}}) {
   const {dashboard} = params;
   console.log("Server-side code in getServerSideProps:", dashboard);
@@ -14,7 +26,7 @@ export default async function test({params}: {params: {dashboard: string}}) {
   // Pass data to the
   return <div className="flex grid flex-wrap mx-auto grid-cols-2 gap-8">
     {/* Left Section*/}
-    <Card className="w-[600px] h-[800px]">
+    <Card className="w-full sm:w-[600px] h-full sm:h-[800px]">
       <CardHeader >
         <CardTitle>Active Sport Competition</CardTitle>
         <CardDescription>List of Ongoing Competition for the team
@@ -22,28 +34,58 @@ export default async function test({params}: {params: {dashboard: string}}) {
         </CardDescription>
       </CardHeader>
       <CardContent>
+        <Table>
+        <TableHeader>
+          <TableRow className="bg-accent">
+            <TableHead>Match Name</TableHead>
+            <TableHead>Time</TableHead>
+            <TableHead>Status</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>
+              <div>
+                gudasfasdfasd
+              </div>
+            </TableCell>
+            <TableCell>
+              <div>
+                gu
+              </div>
+            </TableCell>
+            <TableCell>
+              <div>
+                gu
+              </div>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
       </CardContent>
     </Card>
     
     <div className="flex flex-col">
-       {/* Button Right Section */}
-       <div className="mb-4">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded">
+       {/* Button Section */}
+       <div className="mb-4 flex flex-wraps">
+          <div className="mt-2">Invite:</div>
+          <Button className="bg-blue-500 text-white px-4 py-2 rounded ml-4">
             Click Me
-          </button>
+          </Button>
         </div>
 
     <div className="grid grid-rows-2 gap-4">
       {/* Top Right Section*/}
-      <Card className="h-[300px]">
+      <Card className="h-auto sm:h-[300px]">
         <CardHeader>
-          <CardTitle>Team Member</CardTitle>
+          <CardTitle>Team Member
+          </CardTitle>
           <CardDescription>List of members in the team
           <div className="border-t border-gray-300 my-4"/>
           </CardDescription>
         </CardHeader>
         <CardContent>
-        <div className="mt-4">Caleb</div>
+        <div>Caleb</div>
         <div className="mt-4">Kenneth</div>
         <div className="mt-4">Joesph</div>
         </CardContent>
@@ -57,11 +99,8 @@ export default async function test({params}: {params: {dashboard: string}}) {
           <CardDescription>Card Description</CardDescription>
         </CardHeader>
         <CardContent>
-          <p>Card Content</p>
+          
         </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
       </Card>
     </div>
     </div>

@@ -1,14 +1,39 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/client";
+import { useEffect, useState } from "react";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 
-export default async function Explore() {
+export default function Explore() {
+	const [tableGames, setTableGames] = useState([]);
+
 	const supabase = createClient();
-	let { data: games, error } = await supabase
-		.from("games")
-		.select("*")
-		.order("created_at", { ascending: false });
+
+	async function fetchGames() {
+		let { data: games, error } = await supabase
+			.from("games")
+			.select("*")
+			.order("created_at", { ascending: false });
+
+		setTableGames(games);
+	}
+
+	const channels = supabase
+		.channel("custom-all-channel")
+		.on(
+			"postgres_changes",
+			{ event: "*", schema: "public", table: "games" },
+			(payload) => {
+				fetchGames();
+			}
+		)
+		.subscribe();
+
+	useEffect(() => {
+		fetchGames();
+	});
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -25,7 +50,7 @@ export default async function Explore() {
 			{/* table */}
 			<div className="rounded-lg border bg-card text-card-foreground shadow-sm">
 				{/* @ts-ignore */}
-				<DataTable columns={columns} data={games} />
+				<DataTable columns={columns} data={tableGames} />
 			</div>
 		</div>
 	);

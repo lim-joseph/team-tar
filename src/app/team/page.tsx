@@ -6,7 +6,8 @@ import {redirect, useRouter} from "next/navigation";
 import CreateTeamModal from "./CreateTeamModal";
 import {useEffect, useState} from "react";
 import {getTeams, getModeratingTeams} from "./action";
-
+import {Button} from "@/components/ui/button";
+import Link from "next/link";
 const sportEmoji = {
   basketball: "🏀",
   soccer: "⚽️",
@@ -38,13 +39,18 @@ export default function Page() {
     }
     getProfile();
   }, []);
+  
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold mb-6 text-center">Your Teams</h1>
-      <div className="flex justify-center mb-6">
-        <CreateTeamModal />
+      <div className="flex flex-col justify-center items-center mb-6">
+      <CreateTeamModal />
+      <Link href="/team/join" passHref>
+          <Button className="mt-4">Join Team</Button>
+        </Link>
       </div>
+
       {moderatingTeams.length > 0 && (
         <div>
           <h2 className="text-2xl font-semibold mb-4">Moderating Teams</h2>

@@ -1,45 +1,48 @@
 "use client";
-import {Card} from "@/components/ui/card";
-import {Avatar, AvatarImage, AvatarFallback} from "@/components/ui/avatar";
-import {createClient} from "@/lib/supabase/client";
-import {redirect, useRouter} from "next/navigation";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Card } from "@/components/ui/card";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { getModeratingTeams, getTeams } from "./action";
 import CreateTeamModal from "./CreateTeamModal";
 import {useEffect, useState} from "react";
 import {getTeams, getModeratingTeams} from "./action";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 const sportEmoji = {
-  basketball: "🏀",
-  soccer: "⚽️",
-  football: "🏈",
-  baseball: "⚾️",
-  hockey: "🏒",
-  badminton: "🏸",
-  swimming: "🏊",
+	basketball: "🏀",
+	soccer: "⚽️",
+	football: "🏈",
+	baseball: "⚾️",
+	hockey: "🏒",
+	badminton: "🏸",
+	swimming: "🏊",
 };
 
 export default function Page() {
-  const supabase = createClient();
-  const [teams, setTeams] = useState([]);
-  const [moderatingTeams, setModeratingTeams] = useState([]);
-  const router = useRouter();
-  useEffect(() => {
-    async function getProfile() {
-      const {data: loginData, error: loginError} =
-        await supabase.auth.getUser();
-      if (loginError) {
-        redirect("/login");
-      }
-      const userTeams = await getTeams();
-      console.log(userTeams);
-      setTeams(userTeams);
-      const moderatingTeams = await getModeratingTeams();
-      setModeratingTeams(moderatingTeams);
-      console.log(moderatingTeams);
-    }
-    getProfile();
-  }, []);
-  
+	const supabase = createClient();
+	const [teams, setTeams] = useState([]);
+	const [moderatingTeams, setModeratingTeams] = useState([]);
+	const router = useRouter();
+
+	useEffect(() => {
+		async function getProfile() {
+			const { data, error } = await supabase.auth.getUser();
+			if (error) {
+				router.push("/login");
+				return;
+			}
+
+			const userTeams = await getTeams();
+			console.log(userTeams);
+			setTeams(userTeams);
+			const moderatingTeams = await getModeratingTeams();
+			setModeratingTeams(moderatingTeams);
+			console.log(moderatingTeams);
+		}
+		getProfile();
+	}, []);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">

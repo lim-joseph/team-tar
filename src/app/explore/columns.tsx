@@ -5,8 +5,8 @@ type Game = {
 	name: string;
 	description: string;
 	sport: string;
-	level: "beginner" | "intermediate" | "advanced";
-	gender: "male" | "female" | "mixed";
+	level: "Beginner" | "Intermediate" | "Advanced";
+	gender: "Male" | "Female" | "Mixed";
 	creatorId: number;
 };
 

@@ -24,9 +24,11 @@ export default async function Explore() {
 	return (
 		<div className="flex flex-col gap-4">
 			<h1 className="text-lg font-semibold md:text-2xl">Find a game</h1>
-			<Input placeholder="Search" className="shadow-sm" />
+			<div>
+				<Input placeholder="Search" className="shadow-sm bg-neutral-50" />
+			</div>
 			{/* table */}
-			<div className="rounded-lg border bg-card text-card-foreground shadow-sm">
+			<div className="rounded-lg border bg-card text-card-foreground shadow-sm bg-neutral-50">
 				<Table>
 					<TableHeader>
 						<TableRow>

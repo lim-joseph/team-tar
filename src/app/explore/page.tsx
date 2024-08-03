@@ -22,8 +22,8 @@ import {
 
 export default function Explore() {
 	return (
-		<main className="flex min-h-screen flex-col gap-4">
-			<h1 className="text-lg font-semibold md:text-2xl">Explore</h1>
+		<nav className="flex min-h-screen flex-col gap-4">
+			<h1 className="text-lg font-semibold md:text-2xl">Find a game</h1>
 			<Input placeholder="Search" />
 			{/* table */}
 			<Table>
@@ -261,6 +261,6 @@ export default function Explore() {
 					</TableRow>
 				</TableBody>
 			</Table>
-		</main>
+		</nav>
 	);
 }

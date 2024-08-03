@@ -2,10 +2,12 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
 	CircleUser,
-	Home,
+	HelpCircle,
+	History,
 	LineChart,
-	Package,
 	Package2,
+	Settings,
+	Trophy,
 	Users,
 } from "lucide-react";
 import { Inter as FontSans } from "next/font/google";
@@ -52,6 +54,7 @@ export default function RootLayout({
 					disableTransitionOnChange
 				>
 					<div className="grid min-h-svh w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+						{/* sidebar */}
 						<aside className="hidden border-r bg-muted/40 md:block">
 							<nav className="flex h-full max-h-screen flex-col gap-2">
 								<div className="flex justify-between h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
@@ -65,26 +68,26 @@ export default function RootLayout({
 									<ModeToggle />
 								</div>
 								<div className="flex-1">
-									<nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+									<nav className="grid items-start px-2 text-md font-medium lg:px-4">
 										<Link
 											href="/explore"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-primary bg-muted transition-all hover:text-primary"
 										>
-											<Home className="h-4 w-4" />
-											Explore
+											<Trophy className="h-4 w-4" />
+											Find a game
 										</Link>
 										<Link
 											href="#"
 											className="flex items-center gap-3 rounded-lg  px-3 py-2 text-muted-foreground transition-all hover:text-primary"
 										>
-											<Package className="h-4 w-4" />
+											<Users className="h-4 w-4" />
 											Team
 										</Link>
 										<Link
 											href="#"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
 										>
-											<Users className="h-4 w-4" />
+											<History className="h-4 w-4" />
 											Your matches
 										</Link>
 										<Link
@@ -97,22 +100,24 @@ export default function RootLayout({
 									</nav>
 								</div>
 								<div className="flex flex-col gap-4">
-									<div className="flex flex-col px-4 text-sm font-medium lg:px-4">
+									<div className="flex flex-col px-4 text-md font-medium lg:px-4">
 										<Link
 											href="#"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
 										>
-											<LineChart className="h-4 w-4" />
+											<HelpCircle className="h-4 w-4" />
 											Support
 										</Link>
 										<Link
 											href="#"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
 										>
-											<LineChart className="h-4 w-4" />
+											<Settings className="h-4 w-4" />
 											Settings
 										</Link>
 									</div>
+
+									{/* bottom sidebar */}
 									<div className="mt-auto p-4 gap-4 flex flex-col border-t">
 										<div className="flex gap-4">
 											<DropdownMenu>
@@ -145,18 +150,12 @@ export default function RootLayout({
 							</nav>
 						</aside>
 
-						<div className="flex flex-col">
-							<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-								<div
-									className=" rounded-lg border border-dashed shadow-sm"
-									x-chunk="dashboard-02-chunk-1"
-								>
-									<div className="flex flex-col gap-1 p-8 min-h-full">
-										{children}
-									</div>
-								</div>
-							</main>
-						</div>
+						{/* main */}
+						<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+							<div className="flex flex-col gap-1 p-8 min-h-full lg:mx-28">
+								{children}
+							</div>
+						</main>
 					</div>
 				</ThemeProvider>
 			</body>

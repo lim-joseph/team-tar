@@ -44,6 +44,7 @@ export async function registerTeam(formData: FormData) {
   if (data && !error) {
     console.log(data);
     if (!error) {
+      console.log(code);
       redirect("/team/" + code);
     }
   }
@@ -53,41 +54,35 @@ export async function registerTeam(formData: FormData) {
 
 export async function getTeam(code: string) {
   const supabase = createClient();
+  const {data: loginData, error: loginError} = await supabase.auth.getUser();
+  if (loginError) {
+    revalidatePath("/", "layout");
+    redirect("/login");
+  }
   const {data, error} = await supabase
     .from("Team")
     .select(
-      `id,name, postcode, sport, moderator, description, Member("user_id")`
+      `id,name, postcode, sport, User(*), description,  Member(*, User(*))`
     )
     .eq("id", code);
-
   if (error) {
     return {error: error.message};
   }
-  const memberIds = data[0].Member.map((member) => member.user_id);
-  const members = await getMemberInfo(memberIds);
-  console.log(members);
+  if (data.length < 1) {
+    return {error: "Team not found"};
+  }
+
   const team = {
     teamName: data[0].name,
     postcode: data[0].postcode,
     sport: data[0].sport,
     teamDescription: data[0].description,
-    members: members,
+    moderator: data[0].User,
+    members: data[0].Member,
   };
   return team;
 }
 
-export async function getMemberInfo(memberIds: string[]) {
-  const supabase = createClient();
-  const {data, error} = await supabase
-    .from("User")
-    .select("*")
-    .eq("id", memberIds);
-
-  if (error) {
-    return {error: error.message};
-  }
-  return data;
-}
 export async function getModeratingTeams() {
   const supabase = createClient();
   const user = await supabase.auth.getUser();
@@ -124,7 +119,48 @@ export async function editTeam(teamData: TeamForm, teamId: string) {
   return {data};
 }
 
-export async function joinTeam(code: string) {
+export async function pendingMembers(
+  teamId: string,
+  user_id: string,
+  is_member: boolean
+) {
+  const supabase = createClient();
+  const {data, error} = await supabase
+    .from("Member")
+    .update({is_member: is_member})
+    .eq("team_id", teamId)
+    .eq("user_id", user_id);
+
+  if (error) {
+    return {error: error.message};
+  }
+  return {data};
+}
+export const acceptTeam = async (memberId: number) => {
+  const supabase = createClient();
+  const {data, error} = await supabase
+    .from("Member")
+    .update({is_member: true})
+    .eq("id", memberId);
+  if (error) {
+    return {error: error.message};
+  }
+  return {data};
+};
+
+export const removeMember = async (memberId: number) => {
+  const supabase = createClient();
+  const {data, error} = await supabase
+    .from("Member")
+    .delete()
+    .eq("id", memberId);
+  if (error) {
+    return {error: error.message};
+  }
+  return {data};
+};
+export async function joinTeam(form: FormData) {
+  const code = form.get("teamCode") as string;
   console.log(code);
   const supabase = createClient();
   const user = await supabase.auth.getUser();
@@ -135,16 +171,26 @@ export async function joinTeam(code: string) {
     .select("*")
     .eq("team_id", code)
     .eq("user_id", userId);
-  if (!teamData || teamData.length < 0) {
-    const {data, error} = await supabase.from("Member").insert({
+  if (teamError) {
+    return {error: teamError.message};
+  }
+  console.log(teamData);
+  if (teamData.length > 0) {
+    redirect("/team/" + code);
+  }
+  const {data, error} = await supabase
+    .from("Member")
+    .insert({
       team_id: code,
       user_id: userId,
-    });
+    })
+    .select("*");
 
+  if (error) {
     console.log(error);
-    if (error) {
-      return {error: error.message};
-    }
-    return {data};
+
+    return {error: error.message};
   }
+  console.log(data);
+  return {data};
 }

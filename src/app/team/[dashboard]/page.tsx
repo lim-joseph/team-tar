@@ -21,6 +21,8 @@ import {getTeam} from "../action";
 import PendingMembersCard from "./PendingMembers";
 import {useEffect, useState} from "react";
 import {set} from "date-fns";
+import {redirect} from "next/navigation";
+import {createClient} from "@/lib/supabase/client";
 export default function Dashboard({params}: {params: {dashboard: string}}) {
   const {dashboard} = params;
   const [team, setTeam] = useState({
@@ -32,9 +34,14 @@ export default function Dashboard({params}: {params: {dashboard: string}}) {
   });
   const [approvedMembers, setApprovedMembers] = useState([]);
   const [pendingMembers, setPendingMembers] = useState([]);
+
   useEffect(() => {
     async function fetchTeam() {
       const team = await getTeam(dashboard);
+      if (team.error) {
+        console.log(team.error);
+        redirect("/404");
+      }
       console.log(team);
       setTeam(team);
       setApprovedMembers(team.members.filter((member) => member.is_member));

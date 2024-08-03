@@ -54,6 +54,11 @@ export async function registerTeam(formData: FormData) {
 
 export async function getTeam(code: string) {
   const supabase = createClient();
+  const {data: loginData, error: loginError} = await supabase.auth.getUser();
+  if (loginError) {
+    revalidatePath("/", "layout");
+    redirect("/login");
+  }
   const {data, error} = await supabase
     .from("Team")
     .select(
@@ -131,7 +136,7 @@ export async function pendingMembers(
   }
   return {data};
 }
-export async function acceptTeam(memberId: number) {
+export const acceptTeam = async (memberId: number) => {
   const supabase = createClient();
   const {data, error} = await supabase
     .from("Member")
@@ -141,8 +146,19 @@ export async function acceptTeam(memberId: number) {
     return {error: error.message};
   }
   return {data};
-}
+};
 
+export const removeMember = async (memberId: number) => {
+  const supabase = createClient();
+  const {data, error} = await supabase
+    .from("Member")
+    .delete()
+    .eq("id", memberId);
+  if (error) {
+    return {error: error.message};
+  }
+  return {data};
+};
 export async function joinTeam(form: FormData) {
   const code = form.get("teamCode") as string;
   console.log(code);

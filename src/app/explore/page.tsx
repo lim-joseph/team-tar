@@ -23,8 +23,15 @@ import {
 export default async function Explore() {
 	return (
 		<div className="flex flex-col gap-4">
-			<h1 className="text-lg font-semibold md:text-2xl">Find a game</h1>
-			<Input placeholder="Search" className="shadow-sm" />
+			<div>
+				<h1 className="text-3xl font-bold tracking-tight">Find a game</h1>
+				<h2 className="text-sm text-muted-foreground">
+					Select your team requirements and get involved now!
+				</h2>
+			</div>
+			<div>
+				<Input placeholder="Search" className="shadow-sm" />
+			</div>
 			{/* table */}
 			<div className="rounded-lg border bg-card text-card-foreground shadow-sm">
 				<Table>

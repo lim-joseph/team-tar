@@ -22,6 +22,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { createClient } from "@/lib/supabase/server";
+import { CreateGame } from "./createGame/page";
 import { logout } from "./logout/action";
 
 const fontSans = FontSans({
@@ -64,50 +65,91 @@ export default async function RootLayout({
 								</Link>
 								{/* <ModeToggle /> */}
 							</div>
-							<div className="flex-1">
+							<div>
 								<nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-									<Link
-										href="/explore"
-										className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-primary bg-muted transition-all hover:text-primary"
+									<Button
+										asChild
+										variant={"outline"}
+										className="flex justify-start "
 									>
-										<Trophy className="h-4 w-4" />
-										Find a game
-									</Link>
+										<Link
+											href="/explore"
+											className="flex justify-start items-center gap-3 rounded-lg px-3 py-2 text-muted-primary bg-muted transition-all hover:bg-neutral-200 pl-3"
+										>
+											<Trophy className="h-4 w-4" />
+											Find a game
+										</Link>
+									</Button>
+									<CreateGame />
 									<Link
-										href="/account"
-										className="flex items-center gap-3 rounded-lg  px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+										href="/team/dashboard/"
+										className="flex items-center gap-3 rounded-lg  px-3 py-2  transition-all hover:text-primary"
 									>
 										<Users className="h-4 w-4" />
 										Your team
 									</Link>
 									<Link
-										href="/history"
-										className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+										href="/#"
+										className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
 									>
 										<History className="h-4 w-4" />
 										Your matches
 									</Link>
 									<Link
-										href="/stats"
-										className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+										href="/#"
+										className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
 									>
 										<LineChart className="h-4 w-4" />
 										Analytics
 									</Link>
 								</nav>
 							</div>
-							<div className="flex flex-col gap-4">
+
+							{/* recently viewed */}
+							<div className="mt-8">
+								<ul className="flex flex-col px-4 text-sm font-medium lg:px-4">
+									<li className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary text-xs">
+										Recently viewed matches
+									</li>
+									<li className="flex gap-4">
+										<Link
+											href="#"
+											className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
+										>
+											Caleb's basketball game
+										</Link>
+									</li>
+									<li className="flex gap-4">
+										<Link
+											href="#"
+											className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
+										>
+											Kenneth's football game
+										</Link>
+									</li>
+									<li className="flex gap-4">
+										<Link
+											href="#"
+											className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
+										>
+											Joseph's tennis game
+										</Link>
+									</li>
+								</ul>
+							</div>
+
+							<div className="flex flex-col gap-4 mt-auto">
 								<div className="flex flex-col px-4 text-sm font-medium lg:px-4">
 									<Link
-										href="/support"
-										className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+										href="#"
+										className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
 									>
 										<HelpCircle className="h-4 w-4" />
 										Support
 									</Link>
 									<Link
 										href="/account"
-										className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+										className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
 									>
 										<Settings className="h-4 w-4" />
 										Settings
@@ -125,10 +167,10 @@ export default async function RootLayout({
 															<CircleUser className="h-5 w-5" />
 															<div className="text-sm">
 																{/* @ts-ignore */}
-																<p className="font-bold">
+																<p className="font-medium">
 																	{data.user?.user_metadata.username}
 																</p>
-																<p className="text-muted-foreground text-xs">
+																<p className=" text-xs text-muted-foreground">
 																	{/* @ts-ignore */}
 																	{data.user.email}
 																</p>

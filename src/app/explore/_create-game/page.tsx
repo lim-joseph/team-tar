@@ -23,12 +23,25 @@ import { toast } from "@/components/ui/use-toast";
 import { createClient } from "@/lib/supabase/client";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Game } from "../columns";
 import { DatePicker } from "./date-picker";
 
 export function CreateGame() {
 	const supabase = createClient();
+	const router = useRouter();
+
+	useEffect(() => {
+		async () => {
+			const { data: loginData, error: loginError } =
+				await supabase.auth.getUser();
+			if (loginError) {
+				router.push("/login");
+			}
+		};
+	}, []);
+
 	const [isLoading, setisLoading] = useState(false);
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 

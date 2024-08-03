@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Toaster } from "@/components/ui/toaster";
 import { createClient } from "@/lib/supabase/server";
-import { CreateGame } from "./createGame/page";
+import { CreateGame } from "./explore/_create-game/page";
 import { logout } from "./logout/action";
 
 const fontSans = FontSans({

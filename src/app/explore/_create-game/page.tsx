@@ -24,7 +24,7 @@ import { createClient } from "@/lib/supabase/client";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { Game } from "../explore/columns";
+import { Game } from "../columns";
 import { DatePicker } from "./date-picker";
 
 export function CreateGame() {
@@ -55,14 +55,12 @@ export function CreateGame() {
 			.insert([game])
 			.select();
 
-		setTimeout(() => {
-			setisLoading(false);
-			setIsDialogOpen(false);
-			toast({
-				title: `✨ Game created: ${game.name}`,
-				description: game.description,
-			});
-		}, 1000);
+		setisLoading(false);
+		setIsDialogOpen(false);
+		toast({
+			title: `✨ Game created: ${game.name}`,
+			description: game.description,
+		});
 
 		if (error) {
 			console.error("Error creating game", error);

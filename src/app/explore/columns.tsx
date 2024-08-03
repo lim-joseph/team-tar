@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
+import { GameDetails } from "./_game-details/page";
 
 export type Game = {
 	name: string;
@@ -43,7 +43,7 @@ export const columns: ColumnDef<Game>[] = [
 		id: "details",
 		cell: ({ row }) => {
 			const payment = row.original;
-			return <Button>Details</Button>;
+			return <GameDetails />;
 		},
 	},
 ];

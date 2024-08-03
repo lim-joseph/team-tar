@@ -16,7 +16,6 @@ export default function PendingMembersCard({
   teamId: string;
   members: any[];
 }) {
-
   return (
     <Card className="sm:h-[400px] bg-neutral-100 overflow-y-auto">
       <CardHeader>
@@ -39,7 +38,7 @@ export default function PendingMembersCard({
                 </AvatarFallback>
               </Avatar>
               <div className="ml-4">{member.User.username}</div>
-              <Button className="ml-auto bg-green-500 text-white px-4 py-2 rounded" onClick = {()=>}>
+              <Button className="ml-auto bg-green-500 text-white px-4 py-2 rounded">
                 Accept
               </Button>
               <Button className="ml-auto bg-green-500 text-white px-4 py-2 rounded">

@@ -155,16 +155,26 @@ export async function joinTeam(form: FormData) {
     .select("*")
     .eq("team_id", code)
     .eq("user_id", userId);
-  if (!teamData || teamData.length < 0) {
-    const {data, error} = await supabase.from("Member").insert({
+  if (teamError) {
+    return {error: teamError.message};
+  }
+  console.log(teamData);
+  if (teamData.length > 0) {
+    redirect("/team/" + code);
+  }
+  const {data, error} = await supabase
+    .from("Member")
+    .insert({
       team_id: code,
       user_id: userId,
-    });
+    })
+    .select("*");
 
+  if (error) {
     console.log(error);
-    if (error) {
-      return {error: error.message};
-    }
-    return {data};
+
+    return {error: error.message};
   }
+  console.log(data);
+  return {data};
 }

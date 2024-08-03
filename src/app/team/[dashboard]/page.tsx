@@ -19,20 +19,28 @@ import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
-export default async function test({
+type Game = {
+	id: number;
+	name: string;
+	description: string;
+	sport: string;
+	level: "beginner" | "intermediate" | "advanced";
+	gender: "male" | "female" | "mixed";
+	creatorId: number;
+};
+
+export default async function Dashboard({
 	params,
 }: {
 	params: { dashboard: string };
 }) {
-	const { dashboard } = params;
-
+	// check if user is logged in
 	const supabase = createClient();
-	const { data, error } = await supabase.auth.getUser();
-	if (error) {
+	const { data, error: loginError } = await supabase.auth.getUser();
+	if (loginError) {
 		redirect("/login");
 	}
 
-	// Pass data to the
 	return (
 		<div className="flex grid flex-wrap mx-auto grid-cols-2 gap-8">
 			{/* Left Section*/}

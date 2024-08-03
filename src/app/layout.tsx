@@ -74,7 +74,7 @@ export default async function RootLayout({
 									>
 										<Link
 											href="/explore"
-											className="flex justify-start items-center gap-3 rounded-lg px-3 py-2 text-muted-primary bg-muted transition-all hover:bg-neutral-200 pl-3"
+											className="flex justify-start items-center gap-3 rounded-lg px-3 py-2  bg-muted transition-all pl-3 active:bg-neutral-300"
 										>
 											<Trophy className="h-4 w-4" />
 											Find a game
@@ -83,21 +83,21 @@ export default async function RootLayout({
 									<CreateGame />
 									<Link
 										href="/team/dashboard/"
-										className="flex items-center gap-3 rounded-lg  px-3 py-2  transition-all hover:text-primary"
+										className="flex items-center gap-3 rounded-lg  px-3 py-2  transition-all  hover:bg-neutral-200 active:bg-neutral-300"
 									>
 										<Users className="h-4 w-4" />
 										Your team
 									</Link>
 									<Link
 										href="/#"
-										className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
+										className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 									>
 										<History className="h-4 w-4" />
 										Your matches
 									</Link>
 									<Link
 										href="/#"
-										className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
+										className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 									>
 										<LineChart className="h-4 w-4" />
 										Analytics
@@ -107,14 +107,14 @@ export default async function RootLayout({
 
 							{/* recently viewed */}
 							<div className="mt-8">
-								<ul className="flex flex-col px-4 text-sm font-medium lg:px-4">
-									<li className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary text-xs">
+								<ul className="flex flex-col px-4 text-sm font-medium lg:px-4 w-full">
+									<li className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all text-xs">
 										Recently viewed matches
 									</li>
 									<li className="flex gap-4">
 										<Link
 											href="#"
-											className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
+											className="flex items-center gap-3 rounded-lg px-3 py-2 w-full transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 										>
 											Caleb's basketball game
 										</Link>
@@ -122,7 +122,7 @@ export default async function RootLayout({
 									<li className="flex gap-4">
 										<Link
 											href="#"
-											className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
+											className="flex items-center gap-3 rounded-lg px-3 py-2 w-full transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 										>
 											Kenneth's football game
 										</Link>
@@ -130,7 +130,7 @@ export default async function RootLayout({
 									<li className="flex gap-4">
 										<Link
 											href="#"
-											className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
+											className="flex items-center gap-3 rounded-lg px-3 py-2 w-full transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 										>
 											Joseph's tennis game
 										</Link>
@@ -142,14 +142,14 @@ export default async function RootLayout({
 								<div className="flex flex-col px-4 text-sm font-medium lg:px-4">
 									<Link
 										href="#"
-										className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
+										className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 									>
 										<HelpCircle className="h-4 w-4" />
 										Support
 									</Link>
 									<Link
 										href="/account"
-										className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all hover:text-primary"
+										className="flex items-center gap-3 rounded-lg px-3 py-2  transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 									>
 										<Settings className="h-4 w-4" />
 										Settings

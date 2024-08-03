@@ -7,6 +7,8 @@ interface SignupFormData {
   email: string;
   password: string;
   username: string;
+  firstName: string;
+  lastName: string;
 }
 export async function signup(formData: SignupFormData) {
   const supabase = createClient();
@@ -22,12 +24,22 @@ export async function signup(formData: SignupFormData) {
   };
   console.log(data);
 
-  const {error} = await supabase.auth.signUp(data);
-
+  const {data: authData, error} = await supabase.auth.signUp(data);
   if (error) {
+    console.error(error);
     return {error: error.message};
   }
-
+  const {error: insertError} = await supabase.from("User").insert([
+    {
+      username: formData.username,
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+    },
+  ]);
+  if (insertError) {
+    console.error(insertError);
+    return {error: insertError.message};
+  }
   revalidatePath("/", "layout");
   redirect("/account");
 }

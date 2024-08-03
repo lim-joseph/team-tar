@@ -18,7 +18,7 @@ export function CreateGame() {
 			<DialogTrigger asChild>
 				<Button
 					variant="ghost"
-					className="flex justify-start gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-neutral-50 mt-4"
+					className="flex justify-start gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary hover:bg-neutral-50 mt-4"
 				>
 					<Plus className="h-4 w-4" />
 					Create a game

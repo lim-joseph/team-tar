@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 
-type Game = {
+export type Game = {
 	id: number;
 	name: string;
 	description: string;

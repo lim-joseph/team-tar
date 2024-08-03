@@ -2,7 +2,6 @@
 
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
-import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -12,9 +11,14 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
-export function DatePicker() {
-	const [date, setDate] = React.useState<Date>();
+export function DatePicker({ handleChange }: { handleChange: Function }) {
+	const [date, setDate] = useState<Date>();
+
+	useEffect(() => {
+		handleChange("date", date);
+	}, [date]);
 
 	return (
 		<Popover>

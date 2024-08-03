@@ -32,12 +32,13 @@ export function CreateGame() {
 	const [isLoading, setisLoading] = useState(false);
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-	const [game, setGame] = useState({
+	const [game, setGame] = useState<Game>({
 		name: "",
 		description: "",
 		sport: "",
 		level: "Beginner",
 		gender: "Mixed",
+		date: new Date(),
 	});
 
 	const handleChange = (field: keyof Game, value: any) => {
@@ -65,7 +66,6 @@ export function CreateGame() {
 
 		if (error) {
 			console.error("Error creating game", error);
-			return;
 		}
 	};
 
@@ -80,7 +80,7 @@ export function CreateGame() {
 					Create a game
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px]">
+			<DialogContent className="sm:max-w-[500px]">
 				{/* header */}
 				<DialogHeader>
 					<DialogTitle>Create a game</DialogTitle>
@@ -132,7 +132,7 @@ export function CreateGame() {
 					<Label htmlFor="date" className="text-right">
 						Date
 					</Label>
-					<DatePicker />
+					<DatePicker handleChange={handleChange} />
 				</div>
 
 				<div className="grid grid-cols-2 items-center gap-4">

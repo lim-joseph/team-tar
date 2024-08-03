@@ -1,13 +1,13 @@
+import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 
 export type Game = {
-	id: number;
 	name: string;
 	description: string;
 	sport: string;
 	level: "Beginner" | "Intermediate" | "Advanced";
 	gender: "Male" | "Female" | "Mixed";
-	creatorId: number;
+	date: Date;
 };
 
 export const columns: ColumnDef<Game>[] = [
@@ -31,8 +31,19 @@ export const columns: ColumnDef<Game>[] = [
 		accessorKey: "gender",
 		header: "Gender",
 	},
+	// {
+	// 	accessorKey: "creatorId",
+	// 	header: "Creator",
+	// },
 	{
-		accessorKey: "creatorId",
-		header: "Creator",
+		accessorKey: "date",
+		header: "Date",
+	},
+	{
+		id: "details",
+		cell: ({ row }) => {
+			const payment = row.original;
+			return <Button>Details</Button>;
+		},
 	},
 ];

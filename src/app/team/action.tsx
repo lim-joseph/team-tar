@@ -54,6 +54,11 @@ export async function registerTeam(formData: FormData) {
 
 export async function getTeam(code: string) {
   const supabase = createClient();
+  const {data: loginData, error: loginError} = await supabase.auth.getUser();
+  if (loginError) {
+    revalidatePath("/", "layout");
+    redirect("/login");
+  }
   const {data, error} = await supabase
     .from("Team")
     .select(

@@ -7,8 +7,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {Button} from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -17,10 +15,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {redirect} from "next/navigation";
-import {useEffect, useState} from "react";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {Button} from "@/components/ui/button";
 import {getTeam} from "../action";
 import PendingMembersCard from "./PendingMembers";
+import {useEffect, useState} from "react";
+import {set} from "date-fns";
 export default function Dashboard({params}: {params: {dashboard: string}}) {
   const {dashboard} = params;
   const [team, setTeam] = useState({
@@ -32,14 +32,9 @@ export default function Dashboard({params}: {params: {dashboard: string}}) {
   });
   const [approvedMembers, setApprovedMembers] = useState([]);
   const [pendingMembers, setPendingMembers] = useState([]);
-
   useEffect(() => {
     async function fetchTeam() {
       const team = await getTeam(dashboard);
-      if (team.error) {
-        console.log(team.error);
-        redirect("/404");
-      }
       console.log(team);
       setTeam(team);
       setApprovedMembers(team.members.filter((member) => member.is_member));
@@ -64,11 +59,11 @@ export default function Dashboard({params}: {params: {dashboard: string}}) {
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-5xl font-bold mb-28">{team.teamName}</h1>
-      <div className="flex flex-wrap mx-auto grid grid-cols-1 sm:grid-cols-2 gap-32">
+      <div className="flex flex-wrap mx-auto grid grid-cols-3 gap-32">
         {/* Left Section */}
-        <Card className="max-w-full sm:w-[600px] h-full sm:h-[820px] bg-neutral-100 overflow-y-auto">
+        <Card className="w-full h-full sm:h-[820px] bg-neutral-100 overflow-y-auto">
           <CardHeader>
-            <CardTitle>Active Sport Competition</CardTitle>
+            <CardTitle>Active Sport Match</CardTitle>
             <CardDescription>
               <div className="mt-2">
                 List of Ongoing Competition for the team
@@ -85,6 +80,45 @@ export default function Dashboard({params}: {params: {dashboard: string}}) {
                   <TableHead>Date</TableHead>
                   <TableHead>Time</TableHead>
                   <TableHead>Status</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+                    <div>gudasfasdfasd</div>
+                  </TableCell>
+                  <TableCell>
+                    <div>gu</div>
+                  </TableCell>
+                  <TableCell>
+                    <div>gu</div>
+                  </TableCell>
+                  <TableCell>
+                    <div>gu</div>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+
+        {/* Match History Card Section */}
+        <Card className="h-full sm:h-[820px] bg-neutral-100 overflow-y-auto">
+          <CardHeader>
+            <CardTitle>Match History</CardTitle>
+            <CardDescription>
+              <div className="mt-2">History of all the previous match</div>
+              <div className="border-t border-gray-300 my-4" />
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-accent">
+                  <TableHead>Match Name</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Time</TableHead>
+                  <TableHead>Result</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -154,45 +188,6 @@ export default function Dashboard({params}: {params: {dashboard: string}}) {
                       <div className="ml-4">{User.username}</div>
                     </div>
                   ))}
-              </CardContent>
-            </Card>
-
-            {/* Bottom Right Card */}
-            <Card className="sm:h-[400px] bg-neutral-100 overflow-y-auto">
-              <CardHeader>
-                <CardTitle>Match History</CardTitle>
-                <CardDescription>
-                  <div className="mt-2">History of all the previous match</div>
-                  <div className="border-t border-gray-300 my-4" />
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow className="bg-accent">
-                      <TableHead>Match Name</TableHead>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Time</TableHead>
-                      <TableHead>Result</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>
-                        <div>gudasfasdfasd</div>
-                      </TableCell>
-                      <TableCell>
-                        <div>gu</div>
-                      </TableCell>
-                      <TableCell>
-                        <div>gu</div>
-                      </TableCell>
-                      <TableCell>
-                        <div>gu</div>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
               </CardContent>
             </Card>
             <PendingMembersCard teamId={dashboard} members={pendingMembers} />

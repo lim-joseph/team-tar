@@ -11,7 +11,7 @@ export async function getProfile() {
         redirect("/login");
     }
 
-    const { data, error } = await supabase.from("User").select("*").eq("id", loginData.id).single();
+    const { data, error } = await supabase.from("User").select("*").eq("id", loginData.user.id).single();
     if (error) {
         console.error(error);
         return { error: error.message };

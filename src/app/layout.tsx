@@ -74,7 +74,7 @@ export default async function RootLayout({
 									>
 										<Link
 											href="/explore"
-											className="flex justify-start items-center gap-3 rounded-lg px-3 py-2 text-muted-primary bg-muted transition-all hover:text-primary pl-3"
+											className="flex justify-start items-center gap-3 rounded-lg px-3 py-2 text-muted-primary bg-muted transition-all hover:bg-neutral-200 pl-3"
 										>
 											<Trophy className="h-4 w-4" />
 											Find a game

@@ -26,7 +26,7 @@ export default async function AccountPage() {
 			</h1>
 
 			<div className="grid gap-6">
-				<Card x-chunk="dashboard-04-chunk-1" className="bg-neutral-50">
+				<Card x-chunk="dashboard-04-chunk-1">
 					<CardHeader>
 						<CardTitle>Team name</CardTitle>
 						<CardDescription>

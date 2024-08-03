@@ -19,7 +19,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { toast } from "@/components/ui/use-toast";
 import { createClient } from "@/lib/supabase/client";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { Game } from "../explore/columns";
@@ -27,6 +29,8 @@ import { DatePicker } from "./date-picker";
 
 export function CreateGame() {
 	const supabase = createClient();
+	const [isLoading, setisLoading] = useState(false);
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
 	const [game, setGame] = useState({
 		name: "",
@@ -44,10 +48,20 @@ export function CreateGame() {
 	};
 
 	const handleSubmit = async () => {
+		setisLoading(true);
 		const { data, error } = await supabase
 			.from("games")
 			.insert([game])
 			.select();
+
+		setTimeout(() => {
+			setisLoading(false);
+			setIsDialogOpen(false);
+			toast({
+				title: `✨ Game created: ${game.name}`,
+				description: game.description,
+			});
+		}, 1000);
 
 		if (error) {
 			console.error("Error creating game", error);
@@ -56,7 +70,7 @@ export function CreateGame() {
 	};
 
 	return (
-		<Dialog>
+		<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
 			<DialogTrigger asChild>
 				<Button
 					variant="ghost"
@@ -147,9 +161,16 @@ export function CreateGame() {
 
 				{/* footer */}
 				<DialogFooter>
-					<Button type="submit" onClick={handleSubmit}>
-						Create game
-					</Button>
+					{isLoading ? (
+						<Button type="submit" disabled>
+							<ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+							Creating...
+						</Button>
+					) : (
+						<Button type="submit" onClick={handleSubmit}>
+							Create game
+						</Button>
+					)}
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

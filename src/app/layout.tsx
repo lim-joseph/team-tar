@@ -21,6 +21,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Toaster } from "@/components/ui/toaster";
 import { createClient } from "@/lib/supabase/server";
 import { CreateGame } from "./createGame/page";
 import { logout } from "./logout/action";
@@ -51,6 +52,7 @@ export default async function RootLayout({
 					fontSans.variable
 				)}
 			>
+				<Toaster />
 				<div className="grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] w-full">
 					{/* sidebar */}
 					<aside className="hidden border-r bg-muted/40 md:block max-h-screen">

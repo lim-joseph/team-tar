@@ -59,11 +59,11 @@ export default function Dashboard({params}: {params: {dashboard: string}}) {
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-5xl font-bold mb-28">{team.teamName}</h1>
-      <div className="flex flex-wrap mx-auto grid grid-cols-1 sm:grid-cols-2 gap-32">
+      <div className="flex flex-wrap mx-auto grid grid-cols-3 gap-32">
         {/* Left Section */}
-        <Card className="max-w-full sm:w-[600px] h-full sm:h-[820px] bg-neutral-100 overflow-y-auto">
+        <Card className="w-full h-full sm:h-[820px] bg-neutral-100 overflow-y-auto">
           <CardHeader>
-            <CardTitle>Active Sport Competition</CardTitle>
+            <CardTitle>Active Sport Match</CardTitle>
             <CardDescription>
               <div className="mt-2">
                 List of Ongoing Competition for the team
@@ -80,6 +80,45 @@ export default function Dashboard({params}: {params: {dashboard: string}}) {
                   <TableHead>Date</TableHead>
                   <TableHead>Time</TableHead>
                   <TableHead>Status</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+                    <div>gudasfasdfasd</div>
+                  </TableCell>
+                  <TableCell>
+                    <div>gu</div>
+                  </TableCell>
+                  <TableCell>
+                    <div>gu</div>
+                  </TableCell>
+                  <TableCell>
+                    <div>gu</div>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+
+        {/* Match History Card Section */}
+        <Card className="h-full sm:h-[820px] bg-neutral-100 overflow-y-auto">
+          <CardHeader>
+            <CardTitle>Match History</CardTitle>
+            <CardDescription>
+              <div className="mt-2">History of all the previous match</div>
+              <div className="border-t border-gray-300 my-4" />
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-accent">
+                  <TableHead>Match Name</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Time</TableHead>
+                  <TableHead>Result</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -149,45 +188,6 @@ export default function Dashboard({params}: {params: {dashboard: string}}) {
                       <div className="ml-4">{User.username}</div>
                     </div>
                   ))}
-              </CardContent>
-            </Card>
-
-            {/* Bottom Right Card */}
-            <Card className="sm:h-[400px] bg-neutral-100 overflow-y-auto">
-              <CardHeader>
-                <CardTitle>Match History</CardTitle>
-                <CardDescription>
-                  <div className="mt-2">History of all the previous match</div>
-                  <div className="border-t border-gray-300 my-4" />
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow className="bg-accent">
-                      <TableHead>Match Name</TableHead>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Time</TableHead>
-                      <TableHead>Result</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>
-                        <div>gudasfasdfasd</div>
-                      </TableCell>
-                      <TableCell>
-                        <div>gu</div>
-                      </TableCell>
-                      <TableCell>
-                        <div>gu</div>
-                      </TableCell>
-                      <TableCell>
-                        <div>gu</div>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
               </CardContent>
             </Card>
             <PendingMembersCard teamId={dashboard} members={pendingMembers} />

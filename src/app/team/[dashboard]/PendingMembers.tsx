@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Button} from "@/components/ui/button";
+import {acceptTeam, removeMember} from "../action";
 
 export default function PendingMembersCard({
   teamId,
@@ -16,6 +17,7 @@ export default function PendingMembersCard({
   teamId: string;
   members: any[];
 }) {
+  console.log(members);
   return (
     <Card className="sm:h-[400px] bg-neutral-100 overflow-y-auto">
       <CardHeader>
@@ -38,10 +40,16 @@ export default function PendingMembersCard({
                 </AvatarFallback>
               </Avatar>
               <div className="ml-4">{member.User.username}</div>
-              <Button className="ml-auto bg-green-500 text-white px-4 py-2 rounded">
+              <Button
+                className="ml-auto bg-green-500 text-white px-4 py-2 rounded"
+                onClick={() => acceptTeam(member.id)}
+              >
                 Accept
               </Button>
-              <Button className="ml-auto bg-green-500 text-white px-4 py-2 rounded">
+              <Button
+                className="ml-auto bg-red-500 text-white px-4 py-2 rounded"
+                onClick={() => removeMember(member.id)}
+              >
                 Decline
               </Button>
             </div>

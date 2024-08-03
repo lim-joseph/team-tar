@@ -42,8 +42,7 @@ export const columns: ColumnDef<Game>[] = [
 	{
 		id: "details",
 		cell: ({ row }) => {
-			const payment = row.original;
-			return <GameDetails />;
+			return <GameDetails game={row.original} />;
 		},
 	},
 ];

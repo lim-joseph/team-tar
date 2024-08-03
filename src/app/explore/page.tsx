@@ -20,9 +20,9 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 
-export default function Explore() {
+export default async function Explore() {
 	return (
-		<nav className="flex min-h-screen flex-col gap-4">
+		<div className="flex min-h-screen flex-col gap-4">
 			<h1 className="text-lg font-semibold md:text-2xl">Find a game</h1>
 			<Input placeholder="Search" />
 			{/* table */}
@@ -261,6 +261,6 @@ export default function Explore() {
 					</TableRow>
 				</TableBody>
 			</Table>
-		</nav>
+		</div>
 	);
 }

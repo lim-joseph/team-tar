@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
+	ChevronUp,
 	CircleUser,
 	HelpCircle,
 	History,
@@ -22,6 +23,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { createClient } from "@/lib/supabase/server";
 import { logout } from "./logout/action";
 
 const fontSans = FontSans({
@@ -34,11 +36,14 @@ export const metadata = {
 	description: "Find local scrims",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const supabase = createClient();
+	const { data, error } = await supabase.auth.getUser();
+
 	return (
 		<html lang="en">
 			<body
@@ -119,32 +124,42 @@ export default function RootLayout({
 
 									{/* bottom sidebar */}
 									<div className="mt-auto p-4 gap-4 flex flex-col border-t">
-										<div className="flex gap-4">
-											<DropdownMenu>
-												<DropdownMenuTrigger asChild>
-													<Button
-														variant="ghost"
-														className="flex gap-4 w-full justify-start text-left"
-													>
-														<CircleUser className="h-5 w-5" />
-														<div className="text-sm">
-															<p className="font-bold">Joseph</p>
-															<p className="text-muted-foreground">
-																joseph@example.com
-															</p>
-														</div>
-														<span className="sr-only">Toggle user menu</span>
-													</Button>
-												</DropdownMenuTrigger>
-												<DropdownMenuContent align="end">
-													<DropdownMenuItem>
-														<form action={logout} method="post">
-															<button type="submit">Logout</button>
-														</form>
-													</DropdownMenuItem>
-												</DropdownMenuContent>
-											</DropdownMenu>
-										</div>
+										{!error && data ? (
+											<div className="flex gap-4">
+												<DropdownMenu>
+													<DropdownMenuTrigger asChild>
+														<Button variant="ghost">
+															<div className="flex gap-4 w-full justify-start text-left items-center">
+																<CircleUser className="h-5 w-5" />
+																<div className="text-sm">
+																	{/* @ts-ignore */}
+																	<p className="font-bold">
+																		{data.user?.user_metadata.username}
+																	</p>
+																	<p className="text-muted-foreground text-xs">
+																		{/* @ts-ignore */}
+																		{data.user.email}
+																	</p>
+																</div>
+																<ChevronUp className="h-4 w-4" />
+															</div>
+															<span className="sr-only">Toggle user menu</span>
+														</Button>
+													</DropdownMenuTrigger>
+													<DropdownMenuContent align="end">
+														<DropdownMenuItem>
+															<form action={logout} method="post">
+																<button type="submit">Logout</button>
+															</form>
+														</DropdownMenuItem>
+													</DropdownMenuContent>
+												</DropdownMenu>
+											</div>
+										) : (
+											<Button asChild>
+												<Link href={"/login"}>Login / Signup</Link>
+											</Button>
+										)}
 									</div>
 								</div>
 							</nav>
@@ -152,7 +167,7 @@ export default function RootLayout({
 
 						{/* main */}
 						<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-							<div className="flex flex-col gap-1 p-8 min-h-full lg:mx-28">
+							<div className="flex flex-col gap-1 p-8 min-h-full xl:mx-28 justify-center">
 								{children}
 							</div>
 						</main>

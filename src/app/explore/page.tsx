@@ -5,7 +5,10 @@ import { DataTable } from "./data-table";
 
 export default async function Explore() {
 	const supabase = createClient();
-	let { data: games, error } = await supabase.from("games").select("*");
+	let { data: games, error } = await supabase
+		.from("games")
+		.select("*")
+		.order("created_at", { ascending: false });
 
 	return (
 		<div className="flex flex-col gap-4">

@@ -25,13 +25,13 @@ export function GameDetails({ game }: { game: Game }) {
 					<div className="grid grid-cols-2 gap-4">
 						<div className="space-y-1">
 							<div className="text-sm font-medium">Sport</div>
-							<Input value={game.sport} disabled className="text-black" />
+							<Input value={game.sport} readOnly className="text-black" />
 						</div>
 						<div className="space-y-1">
 							<div className="text-sm font-medium">Level</div>
 							<Input
 								value={game.level}
-								disabled
+								readOnly
 								className="text-black opacity-100"
 							/>
 						</div>
@@ -39,7 +39,7 @@ export function GameDetails({ game }: { game: Game }) {
 							<div className="text-sm font-medium">Gender</div>
 							<Input
 								value={game.gender}
-								disabled
+								readOnly
 								className="text-black opacity-100"
 							/>
 						</div>
@@ -47,7 +47,7 @@ export function GameDetails({ game }: { game: Game }) {
 							<div className="text-sm font-medium">Date & Time</div>
 							<Input
 								value={game.date}
-								disabled
+								readOnly
 								className="text-black opacity-100"
 							/>
 						</div>
@@ -57,7 +57,7 @@ export function GameDetails({ game }: { game: Game }) {
 							<div className="text-sm font-medium">Organizer</div>
 							<Input
 								value="Local Basketball Association"
-								disabled
+								readOnly
 								className="text-black opacity-100"
 							/>
 						</div>

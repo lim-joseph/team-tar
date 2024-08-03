@@ -118,7 +118,7 @@ export default async function RootLayout({
 											href="/a"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 w-full transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 										>
-											Caleb's basketball game
+											Caleb&quot;s basketball game
 										</Link>
 									</li>
 									<li className="flex gap-4">
@@ -126,7 +126,7 @@ export default async function RootLayout({
 											href="/a"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 w-full transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 										>
-											Kenneth's football game
+											Kenneth&quot;s football game
 										</Link>
 									</li>
 									<li className="flex gap-4">
@@ -134,7 +134,7 @@ export default async function RootLayout({
 											href="/a"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 w-full transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 										>
-											Joseph's tennis game
+											Joseph&quot;s tennis game
 										</Link>
 									</li>
 								</ul>

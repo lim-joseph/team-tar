@@ -1,0 +1,154 @@
+{
+    "Hobbies": [
+        {
+            "Category": "Sports",
+            "Subcategories": [
+                "Soccer",
+                "Basketball",
+                "Tennis",
+                "Running",
+                "Cycling",
+                "Swimming",
+                "Hiking",
+                "Yoga",
+                "Martial Arts",
+                "Rock Climbing"
+            ]
+        },
+        {
+            "Category": "Arts and Crafts",
+            "Subcategories": [
+                "Drawing",
+                "Painting",
+                "Sculpting",
+                "Knitting",
+                "Crocheting",
+                "Sewing",
+                "Origami",
+                "Calligraphy",
+                "Pottery",
+                "Woodworking"
+            ]
+        },
+        {
+            "Category": "Music",
+            "Subcategories": [
+                "Playing Instruments",
+                "Singing",
+                "Composing",
+                "DJing",
+                "Music Production",
+                "Collecting Vinyl Records",
+                "Attending Concerts",
+                "Music Appreciation",
+                "Karaoke",
+                "Band Participation"
+            ]
+        },
+        {
+            "Category": "Outdoor Activities",
+            "Subcategories": [
+                "Camping",
+                "Fishing",
+                "Bird Watching",
+                "Gardening",
+                "Stargazing",
+                "Geocaching",
+                "Kayaking",
+                "Sailing",
+                "Picnicking",
+                "Nature Walks"
+            ]
+        },
+        {
+            "Category": "Collecting",
+            "Subcategories": [
+                "Stamps",
+                "Coins",
+                "Antiques",
+                "Action Figures",
+                "Comic Books",
+                "Postcards",
+                "Rocks and Minerals",
+                "Trading Cards",
+                "Vintage Clothing",
+                "Art"
+            ]
+        },
+        {
+            "Category": "Gaming",
+            "Subcategories": [
+                "Video Games",
+                "Board Games",
+                "Card Games",
+                "Puzzle Games",
+                "Role-Playing Games",
+                "Arcade Games",
+                "Chess",
+                "Tabletop Games",
+                "Esports",
+                "Escape Rooms"
+            ]
+        },
+        {
+            "Category": "Technology",
+            "Subcategories": [
+                "Programming",
+                "Robotics",
+                "Electronics",
+                "3D Printing",
+                "Drone Flying",
+                "Virtual Reality",
+                "Home Automation",
+                "Gadget Collecting",
+                "Tech Blogging",
+                "App Development"
+            ]
+        },
+        {
+            "Category": "Literature",
+            "Subcategories": [
+                "Reading Books",
+                "Writing",
+                "Poetry",
+                "Book Club Participation",
+                "Journaling",
+                "Blogging",
+                "Screenwriting",
+                "Comic Book Reading",
+                "Fan Fiction",
+                "Literary Analysis"
+            ]
+        },
+        {
+            "Category": "Food and Drink",
+            "Subcategories": [
+                "Cooking",
+                "Baking",
+                "Wine Tasting",
+                "Brewing Beer",
+                "Mixology",
+                "Food Tasting",
+                "Vegetable Gardening",
+                "Restaurant Hopping",
+                "Cake Decorating",
+                "Culinary Arts"
+            ]
+        },
+        {
+            "Category": "Fitness and Wellness",
+            "Subcategories": [
+                "Yoga",
+                "Pilates",
+                "Meditation",
+                "Weightlifting",
+                "Running",
+                "Cycling",
+                "Dance",
+                "Aerobics",
+                "CrossFit",
+                "Zumba"
+            ]
+        }
+    ]
+}

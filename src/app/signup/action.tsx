@@ -29,11 +29,29 @@ export async function signup(formData: SignupFormData) {
     console.error(error);
     return {error: error.message};
   }
+
+  revalidatePath("/", "layout");
+  redirect("/signup/" + formData.username);
+}
+
+interface ProfileFormData {
+  username: string;
+  firstName: string;
+  lastName: string;
+  birthday: string;
+  city: string;
+  interest: any;
+}
+export async function addUserProfile(formData: ProfileFormData) {
+  const supabase = createClient();
   const {error: insertError} = await supabase.from("User").insert([
     {
       username: formData.username,
       first_name: formData.firstName,
       last_name: formData.lastName,
+      birthday: formData.birthday,
+      city: formData.city,
+      interest: formData.interest,
     },
   ]);
   if (insertError) {
@@ -41,5 +59,5 @@ export async function signup(formData: SignupFormData) {
     return {error: insertError.message};
   }
   revalidatePath("/", "layout");
-  redirect("/account");
+  redirect("/");
 }

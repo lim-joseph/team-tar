@@ -148,8 +148,17 @@ export default async function RootLayout({
 													</DropdownMenuTrigger>
 													<DropdownMenuContent align="end">
 														<DropdownMenuItem>
-															<form action={logout} method="post">
-																<button type="submit">Logout</button>
+															<form
+																action={logout}
+																method="post"
+																className="w-full"
+															>
+																<button
+																	type="submit"
+																	className="w-full text-left"
+																>
+																	Logout
+																</button>
 															</form>
 														</DropdownMenuItem>
 													</DropdownMenuContent>

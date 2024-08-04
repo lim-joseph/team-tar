@@ -156,7 +156,7 @@ export default function Dashboard({
 					</CardContent>
 				</Card>
 
-				<div className="flex flex-col">
+				<div className="flex flex-col min-h-full">
 					<div className="grid grid-rows-2 gap-2">
 						{/* Top Right Section */}
 						<Card className="sm:h-[400px] overflow-y-auto bg-neutral-100">
@@ -165,7 +165,7 @@ export default function Dashboard({
 									<CardTitle>Members</CardTitle>
 									{!isInviteCodeVisible ? (
 										<Button
-											className="bg-blue-500 text-white px-4 py-2 rounded ml-4"
+											className="bg-blue-500 text-white px-4 rounded ml-4"
 											onClick={handleInviteClick}
 										>
 											Invite
@@ -180,7 +180,7 @@ export default function Dashboard({
 									)}
 								</div>
 								<CardDescription>
-									<div className="mt-2"></div> Your team members
+									Your team members
 									<div className="border-t border-gray-300 my-4" />
 								</CardDescription>
 							</CardHeader>

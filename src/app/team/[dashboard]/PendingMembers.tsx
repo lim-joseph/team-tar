@@ -1,4 +1,3 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -7,6 +6,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { UserCircle } from "lucide-react";
 import { acceptTeam, removeMember } from "../action";
 
 export default function PendingMembersCard({
@@ -29,27 +29,22 @@ export default function PendingMembersCard({
 				{members.length > 0 ? (
 					members.map((member) => (
 						<div key={member.id} className="flex items-center mt-4">
-							<Avatar>
-								<AvatarImage
-									src={member.avatarUrl || "https://via.placeholder.com/40"}
-								/>
-								<AvatarFallback>
-									{member.User.username.charAt(0)}
-								</AvatarFallback>
-							</Avatar>
+							<UserCircle />
 							<div className="ml-4">{member.User.username}</div>
-							<Button
-								className="ml-auto bg-green-500 text-white px-4 py-2 rounded"
-								onClick={() => acceptTeam(member.id)}
-							>
-								Accept
-							</Button>
-							<Button
-								className="ml-auto bg-red-500 text-white px-4 py-2 rounded"
-								onClick={() => removeMember(member.id)}
-							>
-								Decline
-							</Button>
+							<div className="ml-auto flex gap-2">
+								<Button
+									className=" bg-green-500 text-white px-4 py-2 rounded"
+									onClick={() => acceptTeam(member.id)}
+								>
+									Accept
+								</Button>
+								<Button
+									className=" bg-red-500 text-white px-4 py-2 rounded"
+									onClick={() => removeMember(member.id)}
+								>
+									Decline
+								</Button>
+							</div>
 						</div>
 					))
 				) : (

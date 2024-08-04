@@ -16,6 +16,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { createClient } from "@/lib/supabase/client";
 import { CircleUser } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getTeam } from "../action";
@@ -26,6 +27,7 @@ export default function Dashboard({
 	params: { dashboard: string };
 }) {
 	const { dashboard } = params;
+	const supabase = createClient();
 	const [team, setTeam] = useState({
 		teamName: "",
 		moderator: { username: "" },
@@ -33,16 +35,29 @@ export default function Dashboard({
 		teamDescription: "",
 		postcode: "",
 	});
+
 	const [approvedMembers, setApprovedMembers] = useState([]);
 	const [pendingMembers, setPendingMembers] = useState([]);
+
+	async function fetchTeam() {
+		const team = await getTeam(dashboard);
+		console.log(team);
+		setTeam(team);
+		setApprovedMembers(team.members.filter((member) => member.is_member));
+		setPendingMembers(team.members.filter((member) => !member.is_member));
+	}
+
+	const channels = supabase
+		.channel("custom-all-channel")
+		.on(
+			"postgres_changes",
+			{ event: "*", schema: "public", table: "Member" },
+			(payload) => {
+				fetchTeam();
+			}
+		)
+		.subscribe();
 	useEffect(() => {
-		async function fetchTeam() {
-			const team = await getTeam(dashboard);
-			console.log(team);
-			setTeam(team);
-			setApprovedMembers(team.members.filter((member) => member.is_member));
-			setPendingMembers(team.members.filter((member) => !member.is_member));
-		}
 		fetchTeam();
 	}, [dashboard]);
 

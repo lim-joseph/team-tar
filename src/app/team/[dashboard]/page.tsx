@@ -66,10 +66,10 @@ export default function Dashboard({
 				{/* Left Section */}
 				<Card className="w-full h-full sm:h-[820px] bg-neutral-100 overflow-y-auto">
 					<CardHeader>
-						<CardTitle>Active Sport Match</CardTitle>
+						<CardTitle>Upcoming Matches</CardTitle>
 						<CardDescription>
 							<div className="mt-2">
-								List of Ongoing Competition for the team
+								Games to look forward to
 							</div>
 							<div className="border-t border-gray-300 my-4" />
 						</CardDescription>
@@ -78,26 +78,25 @@ export default function Dashboard({
 						<Table>
 							<TableHeader>
 								<TableRow className="bg-accent">
-									<TableHead>Match Name</TableHead>
+									<TableHead>Opponent</TableHead>
 									<TableHead>Location</TableHead>
 									<TableHead>Date</TableHead>
 									<TableHead>Time</TableHead>
-									<TableHead>Status</TableHead>
 								</TableRow>
 							</TableHeader>
 							<TableBody>
 								<TableRow>
 									<TableCell>
-										<div>gudasfasdfasd</div>
+										<div>Bball Baddies</div>
 									</TableCell>
 									<TableCell>
-										<div>gu</div>
+										<div>Woodside Basketball Courts</div>
 									</TableCell>
 									<TableCell>
-										<div>gu</div>
+										<div>08/08/2024</div>
 									</TableCell>
 									<TableCell>
-										<div>gu</div>
+										<div>1:00AM</div>
 									</TableCell>
 								</TableRow>
 							</TableBody>
@@ -118,7 +117,7 @@ export default function Dashboard({
 						<Table>
 							<TableHeader>
 								<TableRow className="bg-accent">
-									<TableHead>Match Name</TableHead>
+									<TableHead>Opponent</TableHead>
 									<TableHead>Date</TableHead>
 									<TableHead>Time</TableHead>
 									<TableHead>Result</TableHead>
@@ -127,16 +126,16 @@ export default function Dashboard({
 							<TableBody>
 								<TableRow>
 									<TableCell>
-										<div>First Game ever!</div>
+										<div>Monash Preschool Basketball Team</div>
 									</TableCell>
 									<TableCell>
-										<div>gu</div>
+										<div>04/08/2023</div>
 									</TableCell>
 									<TableCell>
-										<div>gu</div>
+										<div>11:00PM</div>
 									</TableCell>
 									<TableCell>
-										<div>gu</div>
+										<div>L</div>
 									</TableCell>
 								</TableRow>
 							</TableBody>
@@ -156,7 +155,7 @@ export default function Dashboard({
 											className="bg-blue-500 text-white px-4 py-2 rounded ml-4"
 											onClick={handleInviteClick}
 										>
-											Invite Member
+											Invite
 										</Button>
 									) : (
 										<Button

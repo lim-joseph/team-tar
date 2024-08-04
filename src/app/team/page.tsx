@@ -54,7 +54,7 @@ export default function Page() {
 
 			{moderatingTeams.length > 0 && (
 				<div>
-					<h2 className="text-2xl font-semibold mb-2">Teams you moderate</h2>
+					<h2 className="font-semibold mb-2">Teams you moderate</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 						{moderatingTeams.map((team) => (
 							<Card
@@ -82,7 +82,9 @@ export default function Page() {
 			)}
 
 			<div className="mb-12">
-				<h2 className="text-2xl font-semibold mb-2 mt-8">Joined teams</h2>
+				{teams.length > 0 && (
+					<h2 className="font-semibold mb-2 mt-8">Joined teams</h2>
+				)}
 				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 					{teams.map((team) => (
 						<Card

@@ -28,7 +28,7 @@ import { useEffect, useState } from "react";
 import { Game } from "../columns";
 import { DatePicker } from "./date-picker";
 
-export function CreateGame() {
+export function CreateGame({ className }: { className?: string }) {
 	const supabase = createClient();
 	const router = useRouter();
 
@@ -37,6 +37,7 @@ export function CreateGame() {
 			const { data: loginData, error: loginError } =
 				await supabase.auth.getUser();
 			if (loginError) {
+				console.log("Error getting user", loginError);
 				router.push("/login");
 			}
 		};
@@ -85,7 +86,10 @@ export function CreateGame() {
 			<DialogTrigger asChild>
 				<Button
 					variant="ghost"
-					className="flex justify-start gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary mt-4 hover:bg-neutral-200 active:bg-neutral-300"
+					className={
+						"flex justify-start gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary mt-4 hover:bg-neutral-200 active:bg-neutral-300 " +
+						className
+					}
 				>
 					<Plus className="h-4 w-4" />
 					Create a game
@@ -96,7 +100,7 @@ export function CreateGame() {
 				<DialogHeader>
 					<DialogTitle>Create a game</DialogTitle>
 					<DialogDescription>
-						Make changes to your game here. Click save when you&quot;;re done.
+						Make changes to your game here. Click save when you&apos;re done.
 					</DialogDescription>
 				</DialogHeader>
 

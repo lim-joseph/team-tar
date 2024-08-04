@@ -49,7 +49,7 @@ export default function Explore() {
 		.subscribe();
 
 	return (
-		<div className="flex flex-col gap-4">
+		<div className="flex flex-col gap-4 mx-16">
 			<div className="flex justify-between items-end">
 				<div>
 					<h1 className="text-3xl font-bold tracking-tight mt-12">

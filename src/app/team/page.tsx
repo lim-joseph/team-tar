@@ -44,8 +44,8 @@ export default function Page() {
 
 	return (
 		<div className="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-			<h1 className="text-3xl font-bold mb-4 text-center">Your Teams</h1>
-			<div className="flex items-center mb-6 justify-center gap-4">
+			<h1 className="text-3xl font-bold mb-4">Your Teams</h1>
+			<div className="flex mb-6 gap-4">
 				<CreateTeamModal />
 				<Link href="/team/join" passHref>
 					<Button>Join Team</Button>

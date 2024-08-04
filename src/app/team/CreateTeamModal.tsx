@@ -36,10 +36,10 @@ export default function CreateTeamModal() {
           <Button onClick={() => setIsOpen(true)}>Create New Team</Button>
         </DialogTrigger>
         <DialogOverlay />
-        <DialogContent className="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+        <DialogContent className="max-w-screen-xl">
           <Card>
             <CardHeader>
-              <CardTitle className="bg-slate-600 w-full text-white p-12 text-5xl">
+              <CardTitle className="bg-orange-400 w-full text-white p-12 text-5xl">
                 Create Your New Team
               </CardTitle>
               <CardDescription className="mt-4 ml-12">

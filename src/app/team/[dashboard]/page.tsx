@@ -109,7 +109,7 @@ export default function Dashboard({
 					<CardHeader>
 						<CardTitle>Match History</CardTitle>
 						<CardDescription>
-							<div className="mt-2">History of all the previous match</div>
+							<div className="mt-2">Games to look back on</div>
 							<div className="border-t border-gray-300 my-4" />
 						</CardDescription>
 					</CardHeader>
@@ -144,12 +144,12 @@ export default function Dashboard({
 				</Card>
 
 				<div className="flex flex-col">
-					<div className="grid grid-rows-2 gap-4">
+					<div className="grid grid-rows-2 gap-2">
 						{/* Top Right Section */}
 						<Card className="sm:h-[400px] overflow-y-auto bg-neutral-100">
 							<CardHeader>
 								<div className="flex justify-between items-center">
-									<CardTitle>Team Member</CardTitle>
+									<CardTitle>Members</CardTitle>
 									{!isInviteCodeVisible ? (
 										<Button
 											className="bg-blue-500 text-white px-4 py-2 rounded ml-4"
@@ -167,9 +167,10 @@ export default function Dashboard({
 									)}
 								</div>
 								<CardDescription>
-									List of members in the team
-									<div className="border-t border-gray-300 my-4" />
-								</CardDescription>
+							<div className="mt-2"></div> Your team members
+							<div className="border-t border-gray-300 my-4" />
+						</CardDescription>
+					
 							</CardHeader>
 
 							<CardContent>

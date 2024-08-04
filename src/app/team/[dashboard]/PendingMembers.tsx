@@ -23,7 +23,7 @@ export default function PendingMembersCard({
       <CardHeader>
         <CardTitle>Pending</CardTitle>
         <CardDescription>
-          <div className="mt-2">Members that need to be accepted</div>
+          <div className="mt-2">Players waiting to be accepted</div>
           <div className="border-t border-gray-300 my-4" />
         </CardDescription>
       </CardHeader>

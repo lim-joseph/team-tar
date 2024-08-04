@@ -9,7 +9,8 @@ import { DataTable } from "./data-table";
 
 export default function Explore() {
 	const [tableGames, setTableGames] = useState([]);
-
+	const [searchTerm, setSearchTerm] = useState("");
+	const [filteredItems, setFilteredItems] = useState([]);
 	const supabase = createClient();
 
 	async function fetchGames() {
@@ -19,7 +20,20 @@ export default function Explore() {
 			.order("created_at", { ascending: false });
 
 		setTableGames(games);
+		setFilteredItems(games);
 	}
+
+	useEffect(() => {
+		fetchGames();
+	});
+
+	useEffect(() => {
+		setFilteredItems(
+			filteredItems.filter((item) =>
+				item.name.toLowerCase().includes(searchTerm.toLowerCase())
+			)
+		);
+	}, [searchTerm, tableGames]);
 
 	const channels = supabase
 		.channel("custom-all-channel")
@@ -31,10 +45,6 @@ export default function Explore() {
 			}
 		)
 		.subscribe();
-
-	useEffect(() => {
-		fetchGames();
-	});
 
 	return (
 		<div className="flex flex-col gap-4 ">
@@ -51,12 +61,17 @@ export default function Explore() {
 			</div>
 
 			<div>
-				<Input placeholder="Search" className="shadow-sm" />
+				<Input
+					value={searchTerm}
+					onChange={(e) => setSearchTerm(e.target.value)}
+					placeholder="Search"
+					className="shadow-sm"
+				/>
 			</div>
 			{/* table */}
 			<div className="rounded-lg border bg-card text-card-foreground shadow-sm">
 				{/* @ts-ignore */}
-				<DataTable columns={columns} data={tableGames} />
+				<DataTable columns={columns} data={filteredItems} />
 			</div>
 		</div>
 	);

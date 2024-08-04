@@ -37,6 +37,7 @@ export function CreateGame({ className }: { className?: string }) {
 			const { data: loginData, error: loginError } =
 				await supabase.auth.getUser();
 			if (loginError) {
+				console.log("Error getting user", loginError);
 				router.push("/login");
 			}
 		};

@@ -44,17 +44,17 @@ export default function Page() {
 
 	return (
 		<div className="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-			<h1 className="text-3xl font-bold mb-6 text-center">Your Teams</h1>
-			<div className="flex flex-col justify-center items-center mb-6">
+			<h1 className="text-3xl font-bold mb-4 text-center">Your Teams</h1>
+			<div className="flex items-center mb-6 justify-center gap-4">
 				<CreateTeamModal />
 				<Link href="/team/join" passHref>
-					<Button className="mt-4">Join Team</Button>
+					<Button>Join Team</Button>
 				</Link>
 			</div>
 
 			{moderatingTeams.length > 0 && (
 				<div>
-					<h2 className="text-2xl font-semibold mb-4">Moderating Teams</h2>
+					<h2 className="text-2xl font-semibold mb-4">Teams you moderate</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 						{moderatingTeams.map((team) => (
 							<Card
@@ -80,8 +80,9 @@ export default function Page() {
 					</div>
 				</div>
 			)}
+
 			<div className="mb-12">
-				<h2 className="text-2xl font-semibold mb-4">Your Teams</h2>
+				<h2 className="text-2xl font-semibold mb-4 mt-8">Joined Teams</h2>
 				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 					{teams.map((team) => (
 						<Card

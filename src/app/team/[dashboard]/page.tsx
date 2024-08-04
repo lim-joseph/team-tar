@@ -61,7 +61,7 @@ export default function Dashboard({
 	};
 	return (
 		<div className="flex flex-col items-center">
-			<h1 className="text-5xl font-bold mb-28">{team.teamName}</h1>
+			<h1 className="text-5xl font-bold mb-16">{team.teamName}</h1>
 			<div className="mx-auto grid grid-cols-3 gap-2">
 				{/* Left Section */}
 				<Card className="w-full h-full sm:h-[820px] bg-neutral-100 overflow-y-auto">
@@ -165,10 +165,9 @@ export default function Dashboard({
 									)}
 								</div>
 								<CardDescription>
-							<div className="mt-2"></div> Your team members
-							<div className="border-t border-gray-300 my-4" />
-						</CardDescription>
-					
+									<div className="mt-2"></div> Your team members
+									<div className="border-t border-gray-300 my-4" />
+								</CardDescription>
 							</CardHeader>
 
 							<CardContent>

@@ -3,6 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
+import { CreateGame } from "./_create-game/page";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 
@@ -37,11 +38,16 @@ export default function Explore() {
 
 	return (
 		<div className="flex flex-col gap-4 ">
-			<div>
-				<h1 className="text-3xl font-bold tracking-tight mt-12">Find a game</h1>
-				<h2 className="text-sm text-muted-foreground">
-					Select your team requirements and get involved now!
-				</h2>
+			<div className="flex justify-between items-end">
+				<div>
+					<h1 className="text-3xl font-bold tracking-tight mt-12">
+						Find a game
+					</h1>
+					<h2 className="text-sm text-muted-foreground">
+						Select your team requirements and get involved now!
+					</h2>
+				</div>
+				<CreateGame className="bg-white mb-2" />
 			</div>
 
 			<div>

@@ -100,6 +100,21 @@ export default function Dashboard({
 							<TableBody>
 								<TableRow>
 									<TableCell>
+										<div>Jeff&apos;s Dancing Club</div>
+									</TableCell>
+									<TableCell>
+										<div>Jeff&apos;s house</div>
+									</TableCell>
+									<TableCell>
+										<div>2024-08-05</div>
+									</TableCell>
+									<TableCell>
+										<div>1:00PM</div>
+									</TableCell>
+								</TableRow>
+
+								<TableRow>
+									<TableCell>
 										<div>Bball Baddies</div>
 									</TableCell>
 									<TableCell>

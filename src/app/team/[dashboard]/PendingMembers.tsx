@@ -1,27 +1,26 @@
-import React, {useState, useEffect} from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
 } from "@/components/ui/card";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {Button} from "@/components/ui/button";
-import {acceptTeam, removeMember} from "../action";
+import { acceptTeam, removeMember } from "../action";
 
 export default function PendingMembersCard({
-  teamId,
-  members,
+	teamId,
+	members,
 }: {
-  teamId: string;
-  members: any[];
+	teamId: string;
+	members: any[];
 }) {
   console.log(members);
   return (
     <Card className="sm:h-[400px] bg-neutral-100 overflow-y-auto">
       <CardHeader>
-        <CardTitle>Pending</CardTitle>
+        <CardTitle>Requests</CardTitle>
         <CardDescription>
           <div className="mt-2">Players waiting to be accepted</div>
           <div className="border-t border-gray-300 my-4" />

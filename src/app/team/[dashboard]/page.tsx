@@ -7,7 +7,6 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
 	Table,
@@ -17,6 +16,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { CircleUser } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getTeam } from "../action";
 import PendingMembersCard from "./PendingMembers";
@@ -68,9 +68,7 @@ export default function Dashboard({
 					<CardHeader>
 						<CardTitle>Upcoming Matches</CardTitle>
 						<CardDescription>
-							<div className="mt-2">
-								Games to look forward to
-							</div>
+							<div className="mt-2">Games to look forward to</div>
 							<div className="border-t border-gray-300 my-4" />
 						</CardDescription>
 					</CardHeader>
@@ -175,10 +173,7 @@ export default function Dashboard({
 
 							<CardContent>
 								<div className="flex items-center mt-4">
-									<Avatar>
-										<AvatarImage src="https://via.placeholder.com/40" />
-										<AvatarFallback>CA</AvatarFallback>
-									</Avatar>
+									<CircleUser className="h-5 w-5" />
 									<div className="ml-4">{team.moderator.username}</div>
 								</div>
 								{approvedMembers &&
@@ -187,10 +182,7 @@ export default function Dashboard({
 											className="flex items-center mt-4"
 											key={crypto.randomUUID()}
 										>
-											<Avatar>
-												<AvatarImage src="https://via.placeholder.com/40" />
-												<AvatarFallback>CA</AvatarFallback>
-											</Avatar>
+											<CircleUser className="h-5 w-5" />
 											<div className="ml-4">{User.username}</div>
 										</div>
 									))}

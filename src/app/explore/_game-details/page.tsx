@@ -8,11 +8,21 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
+import { useState } from "react";
 import { Game } from "../columns";
 
 export function GameDetails({ game }: { game: Game }) {
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+	const handleJoin = () => [
+		setIsDialogOpen(false),
+		toast({
+			title: `✨ Game joined: ${game.name}`,
+		}),
+	];
 	return (
-		<Dialog>
+		<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
 			<DialogTrigger asChild>
 				<Button>Details</Button>
 			</DialogTrigger>
@@ -63,7 +73,7 @@ export function GameDetails({ game }: { game: Game }) {
 						</div>
 					</div>
 					<div className="flex gap-4">
-						<Button>Join</Button>
+						<Button onClick={handleJoin}>Join</Button>
 						<Button variant="outline">Contact Organizer</Button>
 					</div>
 				</div>

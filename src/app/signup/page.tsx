@@ -11,9 +11,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { signup } from "./action";
 export default function LoginForm() {
+	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState("");
 	const [formData, setFormData] = useState({
 		email: "",
@@ -31,10 +33,12 @@ export default function LoginForm() {
 	};
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		setIsLoading(true);
 		const res = await signup(formData);
 		if (res.error) {
 			setError(res.error);
 		}
+		setIsLoading(false);
 	};
 	return (
 		<Card className="mx-auto max-w-sm">
@@ -78,12 +82,14 @@ export default function LoginForm() {
 								onChange={handleChange}
 							/>
 						</div>
-						<Button type="submit" className="w-full">
-							Create an account
-						</Button>
-						{/* <Button variant="outline" className="w-full">
-              Sign up with GitHub
-            </Button> */}
+						{isLoading ? (
+							<Button type="submit" disabled>
+								<ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+								Creating...
+							</Button>
+						) : (
+							<Button type="submit">Create an account</Button>
+						)}
 					</div>
 					<div className="mt-4 text-center text-sm">
 						Already have an account?{" "}

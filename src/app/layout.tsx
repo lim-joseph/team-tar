@@ -118,7 +118,7 @@ export default async function RootLayout({
 											href="/a"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 w-full transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 										>
-											Caleb's basketball game
+											Caleb&apos;s basketball game
 										</Link>
 									</li>
 									<li className="flex gap-4">
@@ -126,7 +126,7 @@ export default async function RootLayout({
 											href="/a"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 w-full transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 										>
-											Kenneth's football game
+											Kenneth&apos;s football game
 										</Link>
 									</li>
 									<li className="flex gap-4">
@@ -134,7 +134,7 @@ export default async function RootLayout({
 											href="/a"
 											className="flex items-center gap-3 rounded-lg px-3 py-2 w-full transition-all  hover:bg-neutral-200 active:bg-neutral-300 "
 										>
-											Joseph's tennis game
+											Joseph&apos;s tennis game
 										</Link>
 									</li>
 								</ul>
@@ -211,7 +211,7 @@ export default async function RootLayout({
 					</aside>
 
 					{/* main */}
-					<main className="flex flex-col gap-4 justify-center  xl:px-[15%] p-16 bg-[url('../../public/waves.svg')] bg-no-repeat bg-center bg-cover bg-opacity-50">
+					<main className="flex flex-col gap-4 justify-center  p-16 bg-[url('../../public/waves.svg')] bg-no-repeat bg-center bg-cover bg-opacity-50">
 						{children}
 					</main>
 				</div>

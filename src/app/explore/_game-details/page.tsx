@@ -8,11 +8,21 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
+import { useState } from "react";
 import { Game } from "../columns";
 
 export function GameDetails({ game }: { game: Game }) {
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+	const handleJoin = () => [
+		setIsDialogOpen(false),
+		toast({
+			title: `✨ Game joined: ${game.name}`,
+		}),
+	];
 	return (
-		<Dialog>
+		<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
 			<DialogTrigger asChild>
 				<Button>Details</Button>
 			</DialogTrigger>
@@ -25,13 +35,13 @@ export function GameDetails({ game }: { game: Game }) {
 					<div className="grid grid-cols-2 gap-4">
 						<div className="space-y-1">
 							<div className="text-sm font-medium">Sport</div>
-							<Input value={game.sport} disabled className="text-black" />
+							<Input value={game.sport} readOnly className="text-black" />
 						</div>
 						<div className="space-y-1">
 							<div className="text-sm font-medium">Level</div>
 							<Input
 								value={game.level}
-								disabled
+								readOnly
 								className="text-black opacity-100"
 							/>
 						</div>
@@ -39,7 +49,7 @@ export function GameDetails({ game }: { game: Game }) {
 							<div className="text-sm font-medium">Gender</div>
 							<Input
 								value={game.gender}
-								disabled
+								readOnly
 								className="text-black opacity-100"
 							/>
 						</div>
@@ -47,7 +57,7 @@ export function GameDetails({ game }: { game: Game }) {
 							<div className="text-sm font-medium">Date & Time</div>
 							<Input
 								value={game.date}
-								disabled
+								readOnly
 								className="text-black opacity-100"
 							/>
 						</div>
@@ -57,13 +67,13 @@ export function GameDetails({ game }: { game: Game }) {
 							<div className="text-sm font-medium">Organizer</div>
 							<Input
 								value="Local Basketball Association"
-								disabled
+								readOnly
 								className="text-black opacity-100"
 							/>
 						</div>
 					</div>
 					<div className="flex gap-4">
-						<Button>Join</Button>
+						<Button onClick={handleJoin}>Join</Button>
 						<Button variant="outline">Contact Organizer</Button>
 					</div>
 				</div>

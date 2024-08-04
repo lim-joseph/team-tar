@@ -28,11 +28,13 @@ export default function Explore() {
 	});
 
 	useEffect(() => {
-		setFilteredItems(
-			filteredItems.filter((item) =>
-				item.name.toLowerCase().includes(searchTerm.toLowerCase())
-			)
-		);
+		if (filteredItems) {
+			setFilteredItems(
+				filteredItems.filter((item) =>
+					item.name.toLowerCase().includes(searchTerm.toLowerCase())
+				)
+			);
+		}
 	}, [searchTerm, tableGames]);
 
 	const channels = supabase
@@ -47,7 +49,7 @@ export default function Explore() {
 		.subscribe();
 
 	return (
-		<div className="flex flex-col gap-4 ">
+		<div className="flex flex-col gap-4">
 			<div className="flex justify-between items-end">
 				<div>
 					<h1 className="text-3xl font-bold tracking-tight mt-12">

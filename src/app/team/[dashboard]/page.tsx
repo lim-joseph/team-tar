@@ -62,7 +62,7 @@ export default function Dashboard({
 	return (
 		<div className="flex flex-col items-center">
 			<h1 className="text-5xl font-bold mb-28">{team.teamName}</h1>
-			<div className="mx-auto grid grid-cols-3 gap-4">
+			<div className="mx-auto grid grid-cols-3 gap-2">
 				{/* Left Section */}
 				<Card className="w-full h-full sm:h-[820px] bg-neutral-100 overflow-y-auto">
 					<CardHeader>
@@ -127,7 +127,7 @@ export default function Dashboard({
 							<TableBody>
 								<TableRow>
 									<TableCell>
-										<div>gudasfasdfasd</div>
+										<div>First Game ever!</div>
 									</TableCell>
 									<TableCell>
 										<div>gu</div>

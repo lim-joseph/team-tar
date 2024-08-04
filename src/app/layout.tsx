@@ -211,7 +211,7 @@ export default async function RootLayout({
 					</aside>
 
 					{/* main */}
-					<main className="flex flex-col gap-4 justify-center  xl:px-[15%] p-16 bg-[url('../../public/waves.svg')] bg-no-repeat bg-center bg-cover bg-opacity-50">
+					<main className="flex flex-col gap-4 justify-center  p-16 bg-[url('../../public/waves.svg')] bg-no-repeat bg-center bg-cover bg-opacity-50">
 						{children}
 					</main>
 				</div>
